@@ -63,6 +63,9 @@
       <DependentUpon>FormCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\ConfigLib.cs" />
+    <Compile Include="Lib\ExWebClientLib.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\CustomerConfigModel.cs" />
     <Compile Include="Model\MenuConfigModel.cs" />
     <Compile Include="Model\MenuSettings.cs" />
