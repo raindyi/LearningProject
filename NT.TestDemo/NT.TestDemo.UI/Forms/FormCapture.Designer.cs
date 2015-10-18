@@ -49,7 +49,7 @@
             this.tabPageResult = new System.Windows.Forms.TabPage();
             this.dataGridViewResult = new System.Windows.Forms.DataGridView();
             this.tabPageLog = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxLog = new System.Windows.Forms.TextBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
@@ -221,6 +221,7 @@
             this.comboBoxConfig.Name = "comboBoxConfig";
             this.comboBoxConfig.Size = new System.Drawing.Size(151, 21);
             this.comboBoxConfig.TabIndex = 0;
+            this.comboBoxConfig.SelectedValueChanged += new System.EventHandler(this.comboBoxConfig_SelectedValueChanged);
             // 
             // tabInformation
             // 
@@ -255,7 +256,7 @@
             // 
             // tabPageLog
             // 
-            this.tabPageLog.Controls.Add(this.textBox1);
+            this.tabPageLog.Controls.Add(this.textBoxLog);
             this.tabPageLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageLog.Name = "tabPageLog";
             this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
@@ -264,14 +265,14 @@
             this.tabPageLog.Text = "日志";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBoxLog
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(670, 301);
-            this.textBox1.TabIndex = 0;
+            this.textBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxLog.Location = new System.Drawing.Point(3, 3);
+            this.textBoxLog.Multiline = true;
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.Size = new System.Drawing.Size(670, 301);
+            this.textBoxLog.TabIndex = 0;
             // 
             // FormCapture
             // 
@@ -306,7 +307,7 @@
         private System.Windows.Forms.TabPage tabPageResult;
         private System.Windows.Forms.TabPage tabPageLog;
         private System.Windows.Forms.DataGridView dataGridViewResult;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Label labelConfig;
         private System.Windows.Forms.ComboBox comboBoxConfig;
         private System.Windows.Forms.Button btnConfigDetail;

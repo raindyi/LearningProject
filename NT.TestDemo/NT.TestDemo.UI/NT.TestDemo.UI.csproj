@@ -63,6 +63,7 @@
       <DependentUpon>FormCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\ConfigLib.cs" />
+    <Compile Include="Model\CustomerConfigModel.cs" />
     <Compile Include="Model\MenuConfigModel.cs" />
     <Compile Include="Model\MenuSettings.cs" />
     <Compile Include="Program.cs" />
@@ -80,7 +81,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Config\TaskInformation.Config" />
+    <None Include="Config\TaskInformation.Config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
