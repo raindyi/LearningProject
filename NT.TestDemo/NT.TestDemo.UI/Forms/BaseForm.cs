@@ -1,12 +1,20 @@
-﻿using System;
+﻿//**********************************************
+//BaseForm 窗体基类
+//Creater Lynn
+//CreatedTime 2015.10.19 08:34
+//**********************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NT.MultithreadingTaskService.UI.Forms
+namespace NT.TestDemo.UI.Forms
 {
+    /// <summary>
+    /// 窗体基类
+    /// </summary>
     public class BaseForm :Form
     {
         public Boolean Fixable { get; set; }

@@ -7,8 +7,8 @@
     <ProjectGuid>{4F3C079C-4B3D-4EE6-AF67-CA0496ACB719}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NT.MultithreadingTaskService.DAL</RootNamespace>
-    <AssemblyName>NT.MultithreadingTaskService.DAL</AssemblyName>
+    <RootNamespace>NT.TestDemo.DAL</RootNamespace>
+    <AssemblyName>NT.TestDemo.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

@@ -9,10 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
-using NT.MultithreadingTaskService.UI.Lib;
-using NT.MultithreadingTaskService.UI.Model;
+using NT.TestDemo.Core.Lib;
+using NT.TestDemo.Core.Model;
+using NT.TestDemo.UI.Lib;
+using NT.TestDemo.UI.Model;
 
-namespace NT.MultithreadingTaskService.UI.Forms
+namespace NT.TestDemo.UI.Forms
 {
     public partial class FormCapture : BaseForm
     {
@@ -76,6 +78,25 @@ namespace NT.MultithreadingTaskService.UI.Forms
             CustomerConfigModel model = comboBoxConfig.SelectedItem as CustomerConfigModel;
             textBoxUser.Text = model.AC;
             textBoxPassword.Text = model.PW;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Dictionary<Guid, TaskProcessor> tasks=new Dictionary<Guid, TaskProcessor>();
+            for (Int32 i = 0; i < 20; i++)
+            {
+                Guid id = Guid.NewGuid();
+                tasks.Add(id,new TaskBaiduPan()
+                {
+                    TaskId =id
+                });
+            }
+            MultithreadingServices.Instance().Assignment(tasks).Start();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            MultithreadingServices.Instance().End();
         }
 
     }

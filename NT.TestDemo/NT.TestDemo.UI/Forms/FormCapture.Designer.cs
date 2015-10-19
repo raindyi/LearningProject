@@ -1,4 +1,4 @@
-﻿namespace NT.MultithreadingTaskService.UI.Forms
+﻿namespace NT.TestDemo.UI.Forms
 {
     partial class FormCapture
     {
@@ -115,6 +115,7 @@
             this.btnStop.TabIndex = 12;
             this.btnStop.Text = "停止";
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnPause
             // 
@@ -133,6 +134,7 @@
             this.btnStart.TabIndex = 10;
             this.btnStart.Text = "启动";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // textBoxVerificationCode
             // 

@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NT.MultithreadingTaskService.Core.Lib
+namespace NT.TestDemo.Core.Lib
 {
     public class CustomWebClient :WebClient
     {

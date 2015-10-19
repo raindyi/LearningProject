@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NT.MultithreadingTaskService.UI.Model
+namespace NT.TestDemo.UI.Model
 {
     /// <summary>
     /// 自定义配置Model

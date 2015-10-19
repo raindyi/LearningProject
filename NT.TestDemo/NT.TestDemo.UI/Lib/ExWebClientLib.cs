@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NT.MultithreadingTaskService.UI.Lib
+namespace NT.TestDemo.UI.Lib
 {
     public class ExWebClientLib:WebClient
     {

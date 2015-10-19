@@ -7,8 +7,8 @@
     <ProjectGuid>{EF54D277-EF6E-4BD5-8B54-2009104ABA98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NT.MultithreadingTaskService.Core</RootNamespace>
-    <AssemblyName>NT.MultithreadingTaskService.Core</AssemblyName>
+    <RootNamespace>NT.TestDemo.Core</RootNamespace>
+    <AssemblyName>NT.TestDemo.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -47,9 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\EventHandlerCollections.cs" />
     <Compile Include="Lib\CustomWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Lib\MultithreadingServices.cs" />
+    <Compile Include="Model\EnumCollections.cs" />
+    <Compile Include="Model\ITask.cs" />
+    <Compile Include="Model\TaskProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

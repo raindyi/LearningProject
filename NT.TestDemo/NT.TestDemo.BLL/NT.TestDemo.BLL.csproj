@@ -7,8 +7,8 @@
     <ProjectGuid>{E1443D1C-D0FE-484B-B51F-17E30E74EA63}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NT.MultithreadingTaskService.BLL</RootNamespace>
-    <AssemblyName>NT.MultithreadingTaskService.BLL</AssemblyName>
+    <RootNamespace>NT.TestDemo.BLL</RootNamespace>
+    <AssemblyName>NT.TestDemo.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

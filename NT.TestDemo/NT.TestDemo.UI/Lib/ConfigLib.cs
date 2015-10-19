@@ -1,9 +1,9 @@
-﻿using NT.MultithreadingTaskService.UI.Model;
-//**********************************************
+﻿//**********************************************
 //基本配置表示层处理逻辑
 //Creater Lynn
 //CreatedTime 2015.10.15 14:31
 //**********************************************
+using NT.TestDemo.UI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 using System.Xml;
 using log4net;
 
-namespace NT.MultithreadingTaskService.UI.Lib
+namespace NT.TestDemo.UI.Lib
 {
     /// <summary>
     /// 基本配置表示层处理逻辑

@@ -7,8 +7,8 @@
     <ProjectGuid>{862BAACF-2689-4839-B5EB-007F9E3D21AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NT.MultithreadingTaskService.Common</RootNamespace>
-    <AssemblyName>NT.MultithreadingTaskService.Common</AssemblyName>
+    <RootNamespace>NT.TestDemo.Common</RootNamespace>
+    <AssemblyName>NT.TestDemo.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

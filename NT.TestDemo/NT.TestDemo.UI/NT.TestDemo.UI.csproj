@@ -7,8 +7,8 @@
     <ProjectGuid>{B5ACD731-D9F8-47AF-A512-E5487E5E579B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NT.MultithreadingTaskService.UI</RootNamespace>
-    <AssemblyName>NT.MultithreadingTaskService.UI</AssemblyName>
+    <RootNamespace>NT.TestDemo.UI</RootNamespace>
+    <AssemblyName>NT.TestDemo.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -69,6 +69,7 @@
     <Compile Include="Model\CustomerConfigModel.cs" />
     <Compile Include="Model\MenuConfigModel.cs" />
     <Compile Include="Model\MenuSettings.cs" />
+    <Compile Include="Model\TaskBaiduPan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormCapture.resx">
