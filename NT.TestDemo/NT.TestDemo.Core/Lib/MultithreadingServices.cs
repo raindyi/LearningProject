@@ -41,7 +41,9 @@ namespace NT.TestDemo.Core.Lib
         private Queue<TaskProcessor> _queue = new Queue<TaskProcessor>();
         private ILog _log = LogManager.GetLogger(typeof(MultithreadingServices));
         private const Int32 DefSleepInterval = 2000;
-        private List<Thread> _threadPools=new List<Thread>(); 
+        private Dictionary<Int32, ThreadInformation> _threadPools = new Dictionary<Int32, ThreadInformation>();
+        private ThreadStart _threadStart = null;
+        private Boolean _serviceFlag = true;
         #endregion
 
         #region Structure
@@ -78,9 +80,11 @@ namespace NT.TestDemo.Core.Lib
 
         public void End()
         {
+            _serviceFlag = false;
             foreach (var thread in _threadPools)
             {
-                thread.Abort();
+                thread.Value.ProcessThread.Abort();
+                thread.Value.LastedStopTime = DateTime.Now;
             }
         }
 
@@ -99,8 +103,43 @@ namespace NT.TestDemo.Core.Lib
 
         private void ServiceStart()
         {
+            _serviceFlag = true;
             _state = ServiceStateEnum.Runing;
-            ThreadStart start=new ThreadStart(RunService);
+            _threadStart = new ThreadStart(RunService);
+            InitThreadPool();
+            _log.Debug("MultithreadingServices Start");
+            while (_serviceFlag)
+            {
+                foreach (ThreadInformation t in _threadPools.Values)
+                {
+                    if (!t.Flag)
+                    {
+                        t.Flag = false;
+                        if (t.StartTime.Equals(DateTime.MinValue))
+                        {
+                            t.StartTime = DateTime.Now;
+                        }
+                        t.ProcessThread.Start();
+                    }
+                }
+            }
+        }
+
+        private void InitThreadPool()
+        {
+            for (Int32 i = 0; i < _taskAmount; i++)
+            {
+                ThreadInformation _information = new ThreadInformation()
+                {
+                    Flag = true,
+                    LastedStopTime = DateTime.MinValue,
+                    StartTime = DateTime.MinValue,
+                    ProcessThread = new Thread(_threadStart),
+                    ExecutionTimes = 0
+                };
+                _information.Id = _information.ProcessThread.ManagedThreadId;
+                _threadPools.Add(_information.Id,_information);
+            }
         }
 
         private void RunService()
@@ -113,12 +152,19 @@ namespace NT.TestDemo.Core.Lib
                     processor = _queue.Dequeue();
                 }
                 _log.Info(String.Format("Task[{0}] is working:[{1}]", processor.TaskId, processor.State));
-                RecordMessageEvent(new RecordMessageEventArgs()
+                if (RecordMessageEvent != null)
                 {
-                    Id = processor.TaskId,
-                    Message = String.Format("Task[{0}] is working:[{1}]", processor.TaskId, processor.State)
-                });
+                    RecordMessageEvent(new RecordMessageEventArgs()
+                    {
+                        Id = processor.TaskId,
+                        Message = String.Format("Task[{0}] is working:[{1}]", processor.TaskId, processor.State)
+                    });
+                }
+                
                 processor.Work();
+                _threadPools[Thread.CurrentThread.ManagedThreadId].ExecutionTimes++;
+                _threadPools[Thread.CurrentThread.ManagedThreadId].Flag = true;
+                Thread.Sleep(1000);
             }
             else
             {

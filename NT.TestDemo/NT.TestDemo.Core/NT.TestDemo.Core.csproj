@@ -55,6 +55,7 @@
     <Compile Include="Model\EnumCollections.cs" />
     <Compile Include="Model\ITask.cs" />
     <Compile Include="Model\TaskProcessor.cs" />
+    <Compile Include="Model\ThreadInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

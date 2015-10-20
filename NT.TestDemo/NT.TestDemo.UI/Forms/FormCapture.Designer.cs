@@ -125,6 +125,7 @@
             this.btnPause.TabIndex = 11;
             this.btnPause.Text = "暂停";
             this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStart
             // 
@@ -269,7 +270,9 @@
             // 
             // textBoxLog
             // 
+            this.textBoxLog.BackColor = System.Drawing.Color.Black;
             this.textBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxLog.ForeColor = System.Drawing.Color.Yellow;
             this.textBoxLog.Location = new System.Drawing.Point(3, 3);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
