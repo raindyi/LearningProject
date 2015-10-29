@@ -17,6 +17,7 @@ namespace NT.TestDemo.UI.Forms
     /// </summary>
     public class BaseForm :Form
     {
+    
         public Boolean Fixable { get; set; }
         public BaseForm()
         {
@@ -54,6 +55,18 @@ namespace NT.TestDemo.UI.Forms
                 }
             }
             base.WndProc(ref m);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            this.ClientSize = new System.Drawing.Size(445, 262);
+            this.Name = "BaseForm";
+            this.ResumeLayout(false);
+
         }
     }
 }

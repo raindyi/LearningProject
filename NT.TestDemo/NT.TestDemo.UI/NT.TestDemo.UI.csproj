@@ -37,10 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\NT.MultithreadingTaskService.Log\Dll\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -71,8 +69,12 @@
     <Compile Include="Model\MenuConfigModel.cs" />
     <Compile Include="Model\MenuSettings.cs" />
     <Compile Include="Model\TaskBaiduPan.cs" />
+    <Compile Include="Model\TaskIPlaySoft.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapture.resx">
       <DependentUpon>FormCapture.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,9 +103,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\VsProject\visual studio 2015\Projects\log4net-1.2.13\src\log4net.vs2010.csproj">
+      <Project>{181fe707-e161-4722-9f38-6aaab6faa106}</Project>
+      <Name>log4net.vs2010</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NT.TestDemo.BLL\NT.TestDemo.BLL.csproj">
       <Project>{e1443d1c-d0fe-484b-b51f-17e30e74ea63}</Project>
       <Name>NT.TestDemo.BLL</Name>
@@ -115,6 +123,10 @@
     <ProjectReference Include="..\NT.TestDemo.Core\NT.TestDemo.Core.csproj">
       <Project>{ef54d277-ef6e-4bd5-8b54-2009104aba98}</Project>
       <Name>NT.TestDemo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NT.TestDemo.Log\NT.TestDemo.Log.csproj">
+      <Project>{f27afe8e-e5ed-4a1f-a3b8-82930974b5b3}</Project>
+      <Name>NT.TestDemo.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\NT.TestDemo.PL\NT.TestDemo.PL.csproj">
       <Project>{ec6e9827-508d-4da7-a5fe-122cb06ca77b}</Project>

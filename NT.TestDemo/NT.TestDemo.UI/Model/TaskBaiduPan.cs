@@ -31,6 +31,7 @@ namespace NT.TestDemo.UI.Model
         {
             StartTask();
             _log.Debug(String.Format("TaskBaiduPan[{0}] now is working", TaskId));
+
             EndTask();
         }
         protected override void Error()

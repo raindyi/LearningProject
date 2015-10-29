@@ -25,7 +25,7 @@ namespace NT.TestDemo.Core.Lib
         private static object _lockobj=new object();
         private static object _lockobjThread=new object();
         private static MultithreadingServices _services;
-        private Int32 _taskAmount = 10;
+        private Int32 _taskAmount = 1;
         public Int32 TaskAmount {
             get { return _taskAmount; }
             set { _taskAmount = value; }
@@ -42,7 +42,7 @@ namespace NT.TestDemo.Core.Lib
         private ILog _log = LogManager.GetLogger(typeof(MultithreadingServices));
         private const Int32 DefSleepInterval = 2000;
         private Dictionary<Int32, ThreadInformation> _threadPools = new Dictionary<Int32, ThreadInformation>();
-        private ThreadStart _threadStart = null;
+        //private ThreadStart _threadStart = null;
         private Boolean _serviceFlag = true;
         #endregion
 
@@ -83,9 +83,15 @@ namespace NT.TestDemo.Core.Lib
             _serviceFlag = false;
             foreach (var thread in _threadPools)
             {
+                thread.Value.Flag = false;
                 thread.Value.ProcessThread.Abort();
                 thread.Value.LastedStopTime = DateTime.Now;
             }
+        }
+
+        public void Pause()
+        {
+            _serviceFlag = !_serviceFlag;
         }
 
         public MultithreadingServices Assignment(Dictionary<Guid, TaskProcessor> assignmentTasks)
@@ -101,26 +107,43 @@ namespace NT.TestDemo.Core.Lib
             return _services;
         }
 
+        public List<ThreadSimpleInformation> Summary()
+        {
+            List<ThreadSimpleInformation> list=new List<ThreadSimpleInformation>();
+            foreach (ThreadInformation information in _threadPools.Values)
+            {
+                list.Add(new ThreadSimpleInformation()
+                {
+                    Id = information.Id,
+                    ExecutionTimes = information.ExecutionTimes,
+                    Flag = information.Flag,
+                    StartTime = information.StartTime,
+                    LastedStopTime = information.LastedStopTime
+                });
+            }
+            return list;
+        }
+
         private void ServiceStart()
         {
             _serviceFlag = true;
             _state = ServiceStateEnum.Runing;
-            _threadStart = new ThreadStart(RunService);
+            //_threadStart = new ThreadStart(RunService);
             InitThreadPool();
             _log.Debug("MultithreadingServices Start");
-            while (_serviceFlag)
+            foreach (ThreadInformation t in _threadPools.Values)
             {
-                foreach (ThreadInformation t in _threadPools.Values)
+                t.Flag = true;
+                if (t.StartTime.Equals(DateTime.MinValue))
                 {
-                    if (!t.Flag)
-                    {
-                        t.Flag = false;
-                        if (t.StartTime.Equals(DateTime.MinValue))
-                        {
-                            t.StartTime = DateTime.Now;
-                        }
-                        t.ProcessThread.Start();
-                    }
+                    t.StartTime = DateTime.Now;
+                }
+                if (t.ProcessThread.ThreadState == ThreadState.Stopped ||
+                    t.ProcessThread.ThreadState == ThreadState.Unstarted||
+                    t.ProcessThread.ThreadState==ThreadState.Aborted)
+                {
+                    t.ProcessThread.Start();
+                    
                 }
             }
         }
@@ -131,10 +154,10 @@ namespace NT.TestDemo.Core.Lib
             {
                 ThreadInformation _information = new ThreadInformation()
                 {
-                    Flag = true,
+                    Flag = false,
                     LastedStopTime = DateTime.MinValue,
                     StartTime = DateTime.MinValue,
-                    ProcessThread = new Thread(_threadStart),
+                    ProcessThread = new Thread(RunService),
                     ExecutionTimes = 0
                 };
                 _information.Id = _information.ProcessThread.ManagedThreadId;
@@ -144,32 +167,50 @@ namespace NT.TestDemo.Core.Lib
 
         private void RunService()
         {
-            if (_queue.Count > 0)
+            while (_serviceFlag)
             {
-                TaskProcessor processor = null;
-                lock (_lockobjThread)
+                if (_queue.Count > 0)
                 {
-                    processor = _queue.Dequeue();
-                }
-                _log.Info(String.Format("Task[{0}] is working:[{1}]", processor.TaskId, processor.State));
-                if (RecordMessageEvent != null)
-                {
-                    RecordMessageEvent(new RecordMessageEventArgs()
+                    TaskProcessor processor = null;
+                    lock (_lockobjThread)
                     {
-                        Id = processor.TaskId,
-                        Message = String.Format("Task[{0}] is working:[{1}]", processor.TaskId, processor.State)
-                    });
+                        processor = _queue.Dequeue();
+                    }
+                    _log.Info(String.Format("Task[{0}]State[{1}] is working by thread [{2}]:", processor.TaskId, processor.State,Thread.CurrentThread.ManagedThreadId));
+                    if (RecordMessageEvent != null)
+                    {
+                        RecordMessageEvent(new RecordMessageEventArgs()
+                        {
+                            Id = processor.TaskId,
+                            Message = String.Format("Task[{0}]State[{1}] is working by thread [{2}]:", processor.TaskId, processor.State, Thread.CurrentThread.ManagedThreadId)
+                        });
+                    }
+                    processor.Work();
+                    if (RecordMessageEvent != null)
+                    {
+                        RecordMessageEvent(new RecordMessageEventArgs()
+                        {
+                            Id = processor.TaskId,
+                            Message = String.Format("Task[{0}]State[{1}] worked result\r\n [{2}]:", processor.TaskId, processor.State, processor.Message)
+                        });
+                    }
+                    _threadPools[Thread.CurrentThread.ManagedThreadId].ExecutionTimes++;
+                    _threadPools[Thread.CurrentThread.ManagedThreadId].Flag = true;
+                    Thread.Sleep(1000);
                 }
-                
-                processor.Work();
-                _threadPools[Thread.CurrentThread.ManagedThreadId].ExecutionTimes++;
-                _threadPools[Thread.CurrentThread.ManagedThreadId].Flag = true;
-                Thread.Sleep(1000);
-            }
-            else
-            {
-                _log.Error("Task queue is empty");
-                Thread.Sleep(DefSleepInterval);
+                else
+                {
+                    if (RecordMessageEvent != null)
+                    {
+                        RecordMessageEvent(new RecordMessageEventArgs()
+                        {
+                            Id = Guid.Empty,
+                            Message = "Task queue is empty"
+                        });
+                    }
+                    _log.Error("Task queue is empty");
+                    Thread.Sleep(DefSleepInterval);
+                }
             }
         }
 

@@ -52,7 +52,7 @@ namespace NT.TestDemo.DAL
         /// </summary>
         public DataBaseManager()
         {
-            if (String.IsNullOrEmpty(_connStr))
+            if (String.IsNullOrEmpty(ConfigInformation.Connectiong))
             {
                 string connstr = ConfigurationManager.AppSettings.Get(KEYNAME_CONNECTION);
                 var helper = new DecryptAndEncryptionHelper(ConfigInformation.Key,ConfigInformation.Vector);  
@@ -69,7 +69,7 @@ namespace NT.TestDemo.DAL
         /// <param name="providerName">[可选]数据库提供者字符串。当不提供此参数时，会使用System.Data.SqlClient作为数据库提供者。</param>
         public DataBaseManager(string connStr, string providerName = "System.Data.SqlClient")
         {
-            if (String.IsNullOrEmpty(_connStr) || !string.Equals(_providerName, providerName))
+            if (String.IsNullOrEmpty(ConfigInformation.Connectiong) || !string.Equals(_providerName, providerName))
             {
                 string connstr = ConfigurationManager.AppSettings.Get(KEYNAME_CONNECTION);
                 DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper();

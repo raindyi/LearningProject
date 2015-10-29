@@ -29,7 +29,7 @@ namespace NT.TestDemo.Core.Model
         {
             get { return _state; }
         }
-
+        public String Message { get; set; }
         private Int32 _executionCounts = 0;
         #endregion
 
