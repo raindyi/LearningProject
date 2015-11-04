@@ -59,8 +59,18 @@ namespace NT.TestDemo.Common.Settings
         #endregion
 
         #region LogMsg
-
+        /// <summary>
+        /// 系统登录操作
+        /// </summary>
         public const String MC_LOGMSG_LOGINOP = "系统登录操作";
+
+        #endregion
+
+        #region WebBrowser
+        /// <summary>
+        /// 没有相关登录信息
+        /// </summary>
+        public const String MC_ERR_LOGINURLISNULL = "没有相关登录信息";
 
         #endregion
     }

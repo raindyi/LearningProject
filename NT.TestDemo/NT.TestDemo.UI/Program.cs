@@ -16,19 +16,28 @@ namespace NT.TestDemo.UI
 {
     static class Program
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Program));
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BasicConfigurator.Configure();
             ConfigLogConnection();
-            
             Application.Run(new FormCapture());
+        }
+
+        static void Application_ThreadExit(object sender, EventArgs e)
+        {
+            
+        }
+
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            _log.Error(sender, e.Exception);
         }
 
         private static void ConfigLogConnection()

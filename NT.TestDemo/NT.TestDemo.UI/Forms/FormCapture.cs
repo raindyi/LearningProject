@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NT.TestDemo.BLL.Lib;
 using NT.TestDemo.Core.Lib;
 using NT.TestDemo.Core.Model;
 using NT.TestDemo.Log.Model;
@@ -30,10 +35,18 @@ namespace NT.TestDemo.UI.Forms
         public FormCapture()
         {
             InitializeComponent();
+            
         }
         #endregion
 
         #region Function
+
+        private void Test()
+        {
+            //DalTestAction action=new DalTestAction();
+            //action.BatchSqlTest();
+            
+        }
 
         private void InitLoad()
         {
@@ -161,19 +174,42 @@ namespace NT.TestDemo.UI.Forms
             CustomerConfigModel model = comboBoxConfig.SelectedItem as CustomerConfigModel;
             btnStart.Enabled = false;
             Dictionary<Guid, TaskProcessor> tasks=new Dictionary<Guid, TaskProcessor>();
-            for (Int32 i = 0; i < 10; i++)
+            for (Int32 i = 0; i < 20; i++)
             {
                 Guid id = Guid.NewGuid();
                 //tasks.Add(id,new TaskBaiduPan()
                 //{
                 //    TaskId =id
                 //});
-                tasks.Add(id,new TaskIPlaySoft()
+                //tasks.Add(id,new TaskIPlaySoft()
+                //{
+                //    TaskId = id,
+                //    Model = model,
+                //    PageNum = i
+                //});
+                TaskSchAir task=new TaskSchAir();
+                task.ConfigModel = model;
+                task.ManualHandler=(SchAirlineWBMHandler)model.ManualHandler;
+                task.SingleModel = new SchAirlineQueryJsonModel()
                 {
-                    TaskId = id,
-                    Model = model,
-                    PageNum = i
-                });
+                    AVType = 0,
+                    AirlineType = "Single",
+                    BuyerType = "1",
+                    CardFlag = "",
+                    Flag = "",
+                    IsFixedCabin = false,
+                    RouteList = new SchAirlineQueryJsonRouteModel()
+                    {
+                        DesCity = "PVG",
+                        DesCityName = "上海浦东",
+                        FlightDate = "2015-12-14",
+                        OrgCity = "CKG",
+                        OrgCityName = "重庆",
+                        RouteIndex = 1,
+                        RouteName = "单    程"
+                    }
+                };
+                tasks.Add(id, task);
             }
             MultithreadingServices services= MultithreadingServices.Instance().Assignment(tasks);
             services.RecordMessageEvent += services_RecordMessageEvent;
@@ -216,23 +252,65 @@ namespace NT.TestDemo.UI.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //CustomerConfigModel configmodel = comboBoxConfig.SelectedItem as CustomerConfigModel;
-            //ExWebClientLib client=new ExWebClientLib();
-            //UserOperLogModel model = new UserOperLogModel();
-            //ILog log = LogManager.GetLogger("OperInfoLogger");
-            //log.Debug(model);
-            //TaskResultLogModel tmodel = new TaskResultLogModel();
-            //ILog tlog = LogManager.GetLogger("TaskResultLogger");
-            //tlog.Debug(tmodel);
-            ILog log = LogManager.GetLogger("TaskLogDetailLogger");
-            TaskLogDetailModel model = new TaskLogDetailModel();
-            log.Debug(model);
+            _log.Debug("开始转入登录页面.....");
+            CustomerConfigModel configmodel = comboBoxConfig.SelectedItem as CustomerConfigModel;
+            FormLoginWebBrowser formLoginWebBrowser=new FormLoginWebBrowser();
+            formLoginWebBrowser.ConfigModel = configmodel;
+            formLoginWebBrowser.TopLevel = false;
+            formLoginWebBrowser.WindowState=FormWindowState.Maximized;
+            formLoginWebBrowser.Dock=DockStyle.Fill;
+            formLoginWebBrowser.MessageHandler += formLoginWebBrowser_MessageHandler;
+            tabPageBrowser.Controls.Clear();
+            tabPageBrowser.Controls.Add(formLoginWebBrowser);
+            tabInformation.SelectTab(tabPageBrowser);
+            formLoginWebBrowser.Show();
+
+        }
+
+        void formLoginWebBrowser_MessageHandler(object sender, Events.MessageEventArgs messageEventArgs)
+        {
+            CustomerConfigModel configmodel = comboBoxConfig.SelectedItem as CustomerConfigModel;
+            configmodel.ManualHandler=sender;
         }
         #endregion
+
+        private String _json = "";
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            //JsonTest();
+            FormJsonToClass fomrJsonToClass=new FormJsonToClass();
+            fomrJsonToClass.Show();
+        }
+
+        private void JsonTest()
+        {
+            if (String.IsNullOrEmpty(_json))
+            {
+                String path = Application.StartupPath + "\\Res\\Json.txt";
+                if (File.Exists(path))
+                {
+                    _json = File.ReadAllText(path);
+                    string str = _json;
+                    JsonTest();
+                }
+            }
+            else
+            {
+                try
+                {
+                    SchAilrLineJsonModel informationModel = new SchAilrLineJsonModel();
+                    informationModel = JsonConvert.DeserializeObject<SchAilrLineJsonModel>(_json);
+                    informationModel.AirlineListJSONModel =JsonConvert.DeserializeObject<AirlineListJSONModel>(informationModel.AirlineListJSON);
+                }
+                catch (Exception ex)
+                {
+                    _log.Debug(ex);
+                }
+            }
+        }
 
        
 
         
-
     }
 }

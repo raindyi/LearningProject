@@ -37,10 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NT.TestDemo.Core\Dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\EventHandlerCollections.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,15 +67,33 @@
     <Compile Include="Forms\FormCapture.Designer.cs">
       <DependentUpon>FormCapture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormLoginWebBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLoginWebBrowser.Designer.cs">
+      <DependentUpon>FormLoginWebBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormJsonToClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormJsonToClass.Designer.cs">
+      <DependentUpon>FormJsonToClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lib\ConfigLib.cs" />
     <Compile Include="Lib\ExWebClientLib.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Lib\SchAirlineWBMHandler.cs" />
+    <Compile Include="Lib\WebBroswerManualHandler.cs" />
+    <Compile Include="Model\AirLineInformationModel.cs" />
+    <Compile Include="Model\SchAilrLineJsonModel.cs" />
     <Compile Include="Model\CustomerConfigModel.cs" />
     <Compile Include="Model\MenuConfigModel.cs" />
     <Compile Include="Model\MenuSettings.cs" />
+    <Compile Include="Model\SchAirlineQueryJsonModel.cs" />
     <Compile Include="Model\TaskBaiduPan.cs" />
     <Compile Include="Model\TaskIPlaySoft.cs" />
+    <Compile Include="Model\TaskSchAir.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\BaseForm.resx">
@@ -77,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapture.resx">
       <DependentUpon>FormCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoginWebBrowser.resx">
+      <DependentUpon>FormLoginWebBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormJsonToClass.resx">
+      <DependentUpon>FormJsonToClass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -184,6 +214,12 @@
     <Content Include="Images\122-upper-Chi.ico" />
     <Content Include="Images\123-upper-Psi.ico" />
     <Content Include="Images\124-upper-Omega.ico" />
+    <Content Include="Res\Json.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\JsonDetail.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

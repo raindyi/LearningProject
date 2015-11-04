@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCapture));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.btnSummary = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -53,8 +54,9 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.tabPageSummary = new System.Windows.Forms.TabPage();
             this.textBoxSummary = new System.Windows.Forms.TextBox();
+            this.tabPageBrowser = new System.Windows.Forms.TabPage();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -77,6 +79,7 @@
             // 
             // splitContainerMain.Panel1
             // 
+            this.splitContainerMain.Panel1.Controls.Add(this.btnTest);
             this.splitContainerMain.Panel1.Controls.Add(this.btnLogin);
             this.splitContainerMain.Panel1.Controls.Add(this.btnSummary);
             this.splitContainerMain.Panel1.Controls.Add(this.btnExit);
@@ -102,9 +105,19 @@
             this.splitContainerMain.SplitterDistance = 125;
             this.splitContainerMain.TabIndex = 0;
             // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(354, 73);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 30);
+            this.btnLogin.TabIndex = 15;
+            this.btnLogin.Text = "登录";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
             // btnSummary
             // 
-            this.btnSummary.Location = new System.Drawing.Point(435, 73);
+            this.btnSummary.Location = new System.Drawing.Point(516, 75);
             this.btnSummary.Name = "btnSummary";
             this.btnSummary.Size = new System.Drawing.Size(75, 30);
             this.btnSummary.TabIndex = 14;
@@ -248,6 +261,7 @@
             this.tabInformation.Controls.Add(this.tabPageResult);
             this.tabInformation.Controls.Add(this.tabPageLog);
             this.tabInformation.Controls.Add(this.tabPageSummary);
+            this.tabInformation.Controls.Add(this.tabPageBrowser);
             this.tabInformation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabInformation.Location = new System.Drawing.Point(0, 0);
             this.tabInformation.Name = "tabInformation";
@@ -319,15 +333,24 @@
             this.textBoxSummary.Size = new System.Drawing.Size(676, 307);
             this.textBoxSummary.TabIndex = 0;
             // 
-            // btnLogin
+            // tabPageBrowser
             // 
-            this.btnLogin.Location = new System.Drawing.Point(354, 73);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 30);
-            this.btnLogin.TabIndex = 15;
-            this.btnLogin.Text = "登录";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.tabPageBrowser.Location = new System.Drawing.Point(4, 22);
+            this.tabPageBrowser.Name = "tabPageBrowser";
+            this.tabPageBrowser.Size = new System.Drawing.Size(676, 307);
+            this.tabPageBrowser.TabIndex = 3;
+            this.tabPageBrowser.Text = "登录";
+            this.tabPageBrowser.UseVisualStyleBackColor = true;
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(435, 73);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 30);
+            this.btnTest.TabIndex = 16;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // FormCapture
             // 
@@ -384,5 +407,7 @@
         private System.Windows.Forms.TabPage tabPageSummary;
         private System.Windows.Forms.TextBox textBoxSummary;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.TabPage tabPageBrowser;
+        private System.Windows.Forms.Button btnTest;
     }
 }

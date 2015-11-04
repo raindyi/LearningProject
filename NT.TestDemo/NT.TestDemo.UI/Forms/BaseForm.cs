@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NT.TestDemo.UI.Events;
 
 namespace NT.TestDemo.UI.Forms
 {
@@ -19,9 +20,18 @@ namespace NT.TestDemo.UI.Forms
     {
     
         public Boolean Fixable { get; set; }
+        public event MessageEventHandler MessageHandler;
         public BaseForm()
         {
             Fixable = true;
+        }
+
+        protected void MessageProcess(object sender, MessageEventArgs eventArgs)
+        {
+            if (MessageHandler != null)
+            {
+                MessageHandler(sender, eventArgs);
+            }
         }
         protected override void WndProc(ref Message m)
         {

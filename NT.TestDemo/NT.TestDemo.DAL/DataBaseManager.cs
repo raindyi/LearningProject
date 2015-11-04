@@ -336,8 +336,7 @@ namespace NT.TestDemo.DAL
         public int Exec(string sql, DbParameter[] dbParams)
         {
             var cmd = Command(sql, false, dbParams);
-
-            return cmd.ExecuteNonQuery();
+            return Exec(cmd);
         }
 
         /// <summary>
@@ -349,18 +348,14 @@ namespace NT.TestDemo.DAL
         public int Exec(string sql, params object[] vals)
         {
             var cmd = Command(sql, false, vals);
-
-            return cmd.ExecuteNonQuery();
+            return Exec(cmd);
         }
 
 
         public int Exec(String sql)
         {
-            var cmd = DbProviderFactory.CreateCommand();
-            cmd.Connection = Connection;
-            cmd.Transaction = _trans;
-            cmd.CommandText = sql;
-            return cmd.ExecuteNonQuery();
+            var cmd = Command(sql, false, null);
+            return Exec(cmd);
         }
 
         /// <summary>
@@ -384,15 +379,15 @@ namespace NT.TestDemo.DAL
         /// Get fata
         /// </summary>
         /// <param name="sql"></param>
-        /// <returns></returns>
+        /// <returns>tabel or null</returns>
         public DataTable GetDataFromSql(String sql)
         {
-            var adapter = GetDataAdapter();
-            adapter.SelectCommand = Command();
-            DataTable dt = new DataTable();
-            adapter.SelectCommand.CommandText = sql;
-            adapter.Fill(dt);
-            return dt;
+            DataSet ds= GetDataFromSql(new String[] { sql });
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                return ds.Tables[0];
+            }
+            return null;
         }
 
         /// <summary>
@@ -405,12 +400,19 @@ namespace NT.TestDemo.DAL
             var adapter = GetDataAdapter();
             adapter.SelectCommand = Command();
             DataSet ds = new DataSet();
-            foreach (var sql in sqls)
+            try
             {
-                DataTable dt = new DataTable();
-                adapter.SelectCommand.CommandText = sql;
-                adapter.Fill(dt);
-                ds.Tables.Add(dt);
+                foreach (var sql in sqls)
+                {
+                    DataTable dt = new DataTable();
+                    adapter.SelectCommand.CommandText = sql;
+                    adapter.Fill(dt);
+                    ds.Tables.Add(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error("GetDataFromSql", ex);
             }
             return ds;
         }
@@ -425,13 +427,20 @@ namespace NT.TestDemo.DAL
             var adapter = GetDataAdapter();
             adapter.SelectCommand = Command();
             DataSet ds = new DataSet();
-            foreach (var sql in sqls)
+            try
             {
-                DataTable dt = new DataTable();
-                adapter.SelectCommand.CommandText = sql.Value;
-                adapter.Fill(dt);
-                dt.TableName = sql.Key;
-                ds.Tables.Add(dt);
+                foreach (var sql in sqls)
+                {
+                    DataTable dt = new DataTable();
+                    adapter.SelectCommand.CommandText = sql.Value;
+                    adapter.Fill(dt);
+                    dt.TableName = sql.Key;
+                    ds.Tables.Add(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error("GetDataFromSql", ex);
             }
             return ds;
         }
@@ -448,8 +457,16 @@ namespace NT.TestDemo.DAL
             adapter.SelectCommand = new SqlCommand(commandSql, _trans.Connection as SqlConnection, (SqlTransaction)_trans);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapter);
             adapter.UpdateCommand = commandBuilder.GetUpdateCommand();
-            Int32 result = adapter.Update(dataTable);
-            return result > 0;
+            try
+            {
+                Int32 result = adapter.Update(dataTable);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(String.Format("Update::", ex));
+                return false;
+            }
         }
         /// <summary>
         /// Update batch not use transaction
@@ -463,8 +480,17 @@ namespace NT.TestDemo.DAL
             adapter.SelectCommand = new SqlCommand(commandSql, (SqlConnection)Connection);
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapter);
             adapter.UpdateCommand = commandBuilder.GetUpdateCommand();
-            Int32 result = adapter.Update(dataTable);
-            return result > 0;
+            try
+            {
+                Int32 result = adapter.Update(dataTable);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(String.Format("UpdateNoTrans::",ex));
+                return false;
+            }
+            
         }
 
         public Int32 ExceSpTrans(string sql, DbParameter[] dbParams)
@@ -478,7 +504,7 @@ namespace NT.TestDemo.DAL
             {
                 cmd.Parameters.AddRange(dbParams);
             }
-            return cmd.ExecuteNonQuery();
+            return Exec(cmd);
         }
 
         #endregion
@@ -494,8 +520,7 @@ namespace NT.TestDemo.DAL
         public int ExecSP(string spName, DbParameter[] dbParams)
         {
             var cmd = Command(spName, true, dbParams);
-
-            return cmd.ExecuteNonQuery();
+            return Exec(cmd);
         }
 
         /// <summary>
@@ -507,13 +532,26 @@ namespace NT.TestDemo.DAL
         public int ExecSP(string spName, params object[] vals)
         {
             var cmd = Command(spName, true, vals);
-
-            return cmd.ExecuteNonQuery();
+            return Exec(cmd);
         }
 
         #endregion
 
-        public DbDataAdapter GetDataAdapter()
+        protected Int32 Exec(DbCommand command)
+        {
+            Int32 result = 0;
+            try
+            {
+                result = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+            }
+            return result;
+        }
+
+        protected DbDataAdapter GetDataAdapter()
         {
             var adapter = DbProviderFactory.CreateDataAdapter();
             return adapter;
@@ -525,7 +563,7 @@ namespace NT.TestDemo.DAL
         /// <param name="pName"></param>
         /// <param name="val"></param>
         /// <returns></returns>
-        public DbParameter Param(string pName, object val)
+        protected DbParameter Param(string pName, object val)
         {
             var p = DbProviderFactory.CreateParameter();
             p.ParameterName = pName;
@@ -541,7 +579,7 @@ namespace NT.TestDemo.DAL
         /// <param name="isStoreProcedure">[可选]如果提供了此参数，且为True，则把<see cref="sql"/>参数作为存储过程名称。</param>
         /// <param name="vals"></param>
         /// <returns></returns>
-        public DbCommand Command(string sql, bool isStoreProcedure = false, params object[] vals)
+        protected DbCommand Command(string sql, bool isStoreProcedure = false, params object[] vals)
         {
             var cmd = DbProviderFactory.CreateCommand();
             cmd.Connection = Connection;
@@ -572,7 +610,7 @@ namespace NT.TestDemo.DAL
         /// <param name="isStoreProcedure"></param>
         /// <param name="dbParams"></param>
         /// <returns></returns>
-        public DbCommand Command(string sql, bool isStoreProcedure = false, params DbParameter[] dbParams)
+        protected DbCommand Command(string sql, bool isStoreProcedure = false, params DbParameter[] dbParams)
         {
             var cmd = DbProviderFactory.CreateCommand();
             cmd.Connection = Connection;
@@ -592,7 +630,7 @@ namespace NT.TestDemo.DAL
             return cmd;
         }
 
-        public DbCommand Command()
+        protected DbCommand Command()
         {
             var cmd = DbProviderFactory.CreateCommand();
             cmd.Connection = Connection;
@@ -601,7 +639,7 @@ namespace NT.TestDemo.DAL
             return cmd;
         }
 
-        public DbProviderFactory DbProviderFactory
+        protected DbProviderFactory DbProviderFactory
         {
             get
             {
@@ -617,7 +655,7 @@ namespace NT.TestDemo.DAL
             }
         }
 
-        public string ProviderName
+        protected string ProviderName
         {
             get
             {
@@ -647,23 +685,15 @@ namespace NT.TestDemo.DAL
         /// <summary>
         /// 连接字符串
         /// </summary>
-        public string ConnectionString
+        protected string ConnectionString
         {
             get
             {
                 if (string.IsNullOrEmpty(_connStr))
                 {
-                    if (_connSettings == null)
-                    {
-                        _connSettings = ConfigurationManager.ConnectionStrings[KEYNAME_CONNECTION];
-                    }
-                    if (_connSettings != null)
-                    {
-                        _connStr = _connSettings.ConnectionString;
-                    }
-                    else
-                    {
-                    }
+                    string connstr = ConfigurationManager.AppSettings.Get(KEYNAME_CONNECTION);
+                    var helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+                    _connStr = helper.Decrypto(connstr);
                 }
 
                 if (string.IsNullOrEmpty(_connStr))

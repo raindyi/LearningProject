@@ -4,6 +4,7 @@
 //CreatedTime 2015.10.19 11:06
 //**********************************************
 using System;
+using NT.TestDemo.Common.Model;
 
 namespace NT.TestDemo.Core.Events
 {
@@ -16,4 +17,6 @@ namespace NT.TestDemo.Core.Events
     }
 
     public delegate void RecordMessageEventHandler(RecordMessageEventArgs messageEventArgs);
+
+    public delegate void LoginProcessEventHandler(HandlingResult loginEventArgs);
 }

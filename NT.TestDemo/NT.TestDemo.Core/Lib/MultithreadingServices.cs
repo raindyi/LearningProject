@@ -150,6 +150,7 @@ namespace NT.TestDemo.Core.Lib
 
         private void InitThreadPool()
         {
+            _threadPools.Clear();
             for (Int32 i = 0; i < _taskAmount; i++)
             {
                 ThreadInformation _information = new ThreadInformation()

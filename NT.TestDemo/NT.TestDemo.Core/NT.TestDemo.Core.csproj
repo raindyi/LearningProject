@@ -51,6 +51,7 @@
     <Compile Include="Lib\MultithreadingServices.cs" />
     <Compile Include="Model\EnumCollections.cs" />
     <Compile Include="Model\ITask.cs" />
+    <Compile Include="Model\LoginProcessModel.cs" />
     <Compile Include="Model\TaskProcessor.cs" />
     <Compile Include="Model\ThreadInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,13 @@
       <Project>{181fe707-e161-4722-9f38-6aaab6faa106}</Project>
       <Name>log4net.vs2010</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NT.TestDemo.Common\NT.TestDemo.Common.csproj">
+      <Project>{862baacf-2689-4839-b5eb-007f9e3d21ad}</Project>
+      <Name>NT.TestDemo.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dll\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
