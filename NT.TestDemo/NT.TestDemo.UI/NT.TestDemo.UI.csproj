@@ -85,7 +85,10 @@
     </Compile>
     <Compile Include="Lib\SchAirlineWBMHandler.cs" />
     <Compile Include="Lib\WebBroswerManualHandler.cs" />
+    <Compile Include="Model\MemberlModel.cs" />
+    <Compile Include="Model\Order\SchAirLineOrderJsonModel.cs" />
     <Compile Include="Model\AirLineInformationModel.cs" />
+    <Compile Include="Model\Order\SchAirLineOrderSubmitJsonModel.cs" />
     <Compile Include="Model\SchAilrLineJsonModel.cs" />
     <Compile Include="Model\CustomerConfigModel.cs" />
     <Compile Include="Model\MenuConfigModel.cs" />

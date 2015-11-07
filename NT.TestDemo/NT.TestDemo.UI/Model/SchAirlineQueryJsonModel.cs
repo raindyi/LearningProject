@@ -10,6 +10,7 @@ namespace NT.TestDemo.UI.Model
     public class SchAirlineQueryJsonModel
     {
         //{"AirlineType":"Single","IsFixedCabin":false,"RouteList":[{"RouteIndex":1,"RouteName":"单    程","OrgCity":"CKG","DesCity":"PVG","OrgCityName":"重庆","DesCityName":"上海浦东","FlightDate":"2015-12-07"}],"AVType":0}
+        //{"AirlineType":"Single","IsFixedCabin":false,"RouteList":[{"RouteIndex":1,"RouteName":"单    程","OrgCity":"CKG","DesCity":"PVG","OrgCityName":"重庆","DesCityName":"上海浦东","FlightDate":"2015-12-14"}],"AVType":0}"
         /// <summary>
         /// 类型
         /// <example>Single</example>
@@ -20,7 +21,7 @@ namespace NT.TestDemo.UI.Model
         /// <example>false</example>
         /// </summary>
         public Boolean IsFixedCabin { get; set; }
-        public SchAirlineQueryJsonRouteModel RouteList { get; set; }
+        public List<SchAirlineQueryJsonRouteModel> RouteList { get; set; }
         /// <summary>
         /// 
         /// <example>0</example>
@@ -31,7 +32,6 @@ namespace NT.TestDemo.UI.Model
         public String Flag { get; set; }
         public String BuyerType { get; set; }
         public String PassKey { get; set; }
-
         public override string ToString()
         {
             //RouteIndex	1
@@ -66,13 +66,13 @@ namespace NT.TestDemo.UI.Model
             //return builder.ToString();
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat("RouteIndex={0}", RouteList.RouteIndex);
-            builder.AppendFormat("&RouteName={0}", RouteList.RouteName);
-            builder.AppendFormat("&OrgCity={0}", RouteList.OrgCity);
-            builder.AppendFormat("&DesCity={0}", RouteList.DesCity);
-            builder.AppendFormat("&OrgCityName={0}", RouteList.OrgCityName);
-            builder.AppendFormat("&DesCityName={0}", RouteList.DesCityName);
-            builder.AppendFormat("&FlightDate={0}", RouteList.FlightDate);
+            builder.AppendFormat("RouteIndex={0}", RouteList[0].RouteIndex);
+            builder.AppendFormat("&RouteName={0}", RouteList[0].RouteName);
+            builder.AppendFormat("&OrgCity={0}", RouteList[0].OrgCity);
+            builder.AppendFormat("&DesCity={0}", RouteList[0].DesCity);
+            builder.AppendFormat("&OrgCityName={0}", RouteList[0].OrgCityName);
+            builder.AppendFormat("&DesCityName={0}", RouteList[0].DesCityName);
+            builder.AppendFormat("&FlightDate={0}", RouteList[0].FlightDate);
             builder.AppendFormat("&AirlineType={0}", AirlineType);
             builder.AppendFormat("&AVType={0}", AVType);
             builder.AppendFormat("&CardFlag={0}", CardFlag);

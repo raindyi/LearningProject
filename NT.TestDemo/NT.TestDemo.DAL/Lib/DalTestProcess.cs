@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -44,6 +45,16 @@ namespace NT.TestDemo.DAL.Lib
                 }
             }
             return result;
+        }
+
+        public DataSet Query(String sql)
+        {
+
+            using (DataBaseManager manager = new DataBaseManager())
+            {
+                DataSet ds= manager.GetTable(sql,null);
+            }
+            return null;
         }
     }
 }

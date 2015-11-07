@@ -16,6 +16,7 @@ using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NT.TestDemo.BLL.Lib;
+using NT.TestDemo.Common.Helper;
 using NT.TestDemo.Core.Lib;
 using NT.TestDemo.Core.Model;
 using NT.TestDemo.Log.Model;
@@ -198,15 +199,18 @@ namespace NT.TestDemo.UI.Forms
                     CardFlag = "",
                     Flag = "",
                     IsFixedCabin = false,
-                    RouteList = new SchAirlineQueryJsonRouteModel()
+                    RouteList = new List<SchAirlineQueryJsonRouteModel>()
                     {
-                        DesCity = "PVG",
-                        DesCityName = "上海浦东",
-                        FlightDate = "2015-12-14",
-                        OrgCity = "CKG",
-                        OrgCityName = "重庆",
-                        RouteIndex = 1,
-                        RouteName = "单    程"
+                        new SchAirlineQueryJsonRouteModel()
+                        {
+                            DesCity = "PVG",
+                            DesCityName = "上海浦东",
+                            FlightDate = "2015-12-14",
+                            OrgCity = "CKG",
+                            OrgCityName = "重庆",
+                            RouteIndex = 1,
+                            RouteName = "单    程"
+                        }
                     }
                 };
                 tasks.Add(id, task);
@@ -277,9 +281,16 @@ namespace NT.TestDemo.UI.Forms
         private String _json = "";
         private void btnTest_Click(object sender, EventArgs e)
         {
+            //String ss = Base64Encode("LFWX1208");
             //JsonTest();
-            FormJsonToClass fomrJsonToClass=new FormJsonToClass();
+            FormJsonToClass fomrJsonToClass = new FormJsonToClass();
             fomrJsonToClass.Show();
+        }
+
+        private string Base64Encode(string str)
+        {
+            var barray = Encoding.Default.GetBytes(str);
+            return Convert.ToBase64String(barray);
         }
 
         private void JsonTest()

@@ -67,6 +67,7 @@
             this.textBoxSource.Location = new System.Drawing.Point(0, 0);
             this.textBoxSource.Multiline = true;
             this.textBoxSource.Name = "textBoxSource";
+            this.textBoxSource.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxSource.Size = new System.Drawing.Size(417, 538);
             this.textBoxSource.TabIndex = 0;
             // 
@@ -110,6 +111,7 @@
             this.textBoxResult.Location = new System.Drawing.Point(0, 0);
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
+            this.textBoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxResult.Size = new System.Drawing.Size(356, 504);
             this.textBoxResult.TabIndex = 0;
             this.textBoxResult.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxResult_MouseDoubleClick);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,15 @@ namespace NT.TestDemo.BLL.Lib
         {
             return new DalTestProcess().BatchSqlTest();
         }
+        //public DataSet Query(String sql)
+        //{
+
+        //}
+
+        //public DataSet Query()
+        //{
+        //    String sql = "";
+        //    return null;
+        //}
     }
 }
