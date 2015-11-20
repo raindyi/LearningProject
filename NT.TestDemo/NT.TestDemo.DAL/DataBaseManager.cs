@@ -350,12 +350,48 @@ namespace NT.TestDemo.DAL
             var cmd = Command(sql, false, vals);
             return Exec(cmd);
         }
-
-
-        public int Exec(String sql)
+        protected Int32 Exec(DbCommand command)
         {
-            var cmd = Command(sql, false, null);
-            return Exec(cmd);
+            Int32 result = 0;
+            try
+            {
+                result = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+            }
+            return result;
+        }
+        /// <summary>
+        /// 执行SQL语句，并可以使用可先的参数列表。
+        /// </summary>
+        /// <param name="sql">要执行的插入SQL语句。</param>
+        /// <param name="dbParams">可选的参数列表。</param>
+        /// <returns>执行SQL语句时有服务器上受影响的数据行数。</returns>
+        public Int32 Exec(string sql)
+        {
+            //var cmd = Command(sql, false, dbParams);
+            //return Exec(cmd);
+            Int32 result = -1;
+            var cmd = DbProviderFactory.CreateCommand();
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                cmd.Connection = connection;
+                cmd.Transaction = _trans;
+                cmd.CommandText = sql;
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("ExecuteNonQuery::", ex);
+                    throw;
+                }
+            }
+            return result;
         }
 
         /// <summary>
@@ -535,22 +571,7 @@ namespace NT.TestDemo.DAL
             var cmd = Command(spName, true, vals);
             return Exec(cmd);
         }
-
         #endregion
-
-        protected Int32 Exec(DbCommand command)
-        {
-            Int32 result = 0;
-            try
-            {
-                result = command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                _log.Error(ex);
-            }
-            return result;
-        }
 
         protected DbDataAdapter GetDataAdapter()
         {

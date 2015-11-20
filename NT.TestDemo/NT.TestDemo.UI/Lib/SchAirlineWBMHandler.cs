@@ -68,6 +68,13 @@ namespace NT.TestDemo.UI.Lib
             }
         }
 
+        public void AutoLogin()
+        {
+            WebClient client = InitClient();
+            client.Headers.Add(HttpRequestHeader.Referer, "http://www.scal.com.cn/Web");
+
+        }
+
         public void Login()
         {
             if (_loginModel != null)

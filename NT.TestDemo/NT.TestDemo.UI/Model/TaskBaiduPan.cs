@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
+using NT.TestDemo.BLL.Lib;
 using NT.TestDemo.Core.Model;
 
 namespace NT.TestDemo.UI.Model
@@ -31,7 +32,8 @@ namespace NT.TestDemo.UI.Model
         {
             StartTask();
             _log.Debug(String.Format("TaskBaiduPan[{0}] now is working", TaskId));
-
+            DalTestAction action = new DalTestAction();
+            action.BatchSqlTest();
             EndTask();
         }
         protected override void Error()

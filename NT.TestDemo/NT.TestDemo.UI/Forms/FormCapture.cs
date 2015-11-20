@@ -44,8 +44,8 @@ namespace NT.TestDemo.UI.Forms
 
         private void Test()
         {
-            //DalTestAction action=new DalTestAction();
-            //action.BatchSqlTest();
+            DalTestAction action = new DalTestAction();
+            action.BatchSqlTest();
             
         }
 
@@ -175,22 +175,22 @@ namespace NT.TestDemo.UI.Forms
             CustomerConfigModel model = comboBoxConfig.SelectedItem as CustomerConfigModel;
             btnStart.Enabled = false;
             Dictionary<Guid, TaskProcessor> tasks=new Dictionary<Guid, TaskProcessor>();
-            for (Int32 i = 0; i < 20; i++)
+            for (Int32 i = 0; i < 1; i++)
             {
                 Guid id = Guid.NewGuid();
-                //tasks.Add(id,new TaskBaiduPan()
+                //tasks.Add(id, new TaskBaiduPan()
                 //{
-                //    TaskId =id
+                //    TaskId = id
                 //});
-                //tasks.Add(id,new TaskIPlaySoft()
+                //tasks.Add(id, new TaskIPlaySoft()
                 //{
                 //    TaskId = id,
                 //    Model = model,
                 //    PageNum = i
                 //});
-                TaskSchAir task=new TaskSchAir();
+                TaskSchAir task = new TaskSchAir();
                 task.ConfigModel = model;
-                task.ManualHandler=(SchAirlineWBMHandler)model.ManualHandler;
+                task.ManualHandler = (SchAirlineWBMHandler)model.ManualHandler;
                 task.SingleModel = new SchAirlineQueryJsonModel()
                 {
                     AVType = 0,
@@ -281,10 +281,11 @@ namespace NT.TestDemo.UI.Forms
         private String _json = "";
         private void btnTest_Click(object sender, EventArgs e)
         {
+            //Test();
             //String ss = Base64Encode("LFWX1208");
             //JsonTest();
-            FormJsonToClass fomrJsonToClass = new FormJsonToClass();
-            fomrJsonToClass.Show();
+            //FormJsonToClass fomrJsonToClass = new FormJsonToClass();
+            //fomrJsonToClass.Show();
         }
 
         private string Base64Encode(string str)

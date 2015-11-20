@@ -17,7 +17,7 @@ namespace NT.TestDemo.DAL.Lib
             List<String> sqls=new List<string>();
             String sql = "";
             StringBuilder builder=new StringBuilder();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 500; i++)
             {
                 sql = String.Format("INSERT INTO BatchTest(ID, Code, [Name], CreatedTime) VALUES (newid(), '{0}', '{1}', getdate());",
                     "Code" + i, "Name" + i);

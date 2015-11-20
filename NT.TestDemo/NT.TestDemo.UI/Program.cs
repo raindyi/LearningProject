@@ -27,6 +27,17 @@ namespace NT.TestDemo.UI
             Application.SetCompatibleTextRenderingDefault(false);
             BasicConfigurator.Configure();
             ConfigLogConnection();
+            ILog logdb = LogManager.GetLogger("OperInfoLogger");
+            logdb.Debug(new UserOperLogModel()
+            {
+                Flag = 1,
+                ID = Guid.NewGuid(),
+                Message = "Message:Program running",
+                OperFlag = "1",
+                OperInfo = "Program running",
+                OperResult = "Ready",
+                User = "Tester"
+            });
             Application.Run(new FormCapture());
         }
 
