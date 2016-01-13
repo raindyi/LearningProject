@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCapture));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.textBoxCalcResult = new System.Windows.Forms.TextBox();
+            this.textBoxCalc = new System.Windows.Forms.TextBox();
+            this.buttonCalc = new System.Windows.Forms.Button();
+            this.btnJsonToClass = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnSummary = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -56,7 +61,6 @@
             this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.tabPageBrowser = new System.Windows.Forms.TabPage();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -79,6 +83,10 @@
             // 
             // splitContainerMain.Panel1
             // 
+            this.splitContainerMain.Panel1.Controls.Add(this.textBoxCalcResult);
+            this.splitContainerMain.Panel1.Controls.Add(this.textBoxCalc);
+            this.splitContainerMain.Panel1.Controls.Add(this.buttonCalc);
+            this.splitContainerMain.Panel1.Controls.Add(this.btnJsonToClass);
             this.splitContainerMain.Panel1.Controls.Add(this.btnTest);
             this.splitContainerMain.Panel1.Controls.Add(this.btnLogin);
             this.splitContainerMain.Panel1.Controls.Add(this.btnSummary);
@@ -101,9 +109,53 @@
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.Controls.Add(this.tabInformation);
-            this.splitContainerMain.Size = new System.Drawing.Size(684, 462);
+            this.splitContainerMain.Size = new System.Drawing.Size(766, 462);
             this.splitContainerMain.SplitterDistance = 125;
             this.splitContainerMain.TabIndex = 0;
+            // 
+            // textBoxCalcResult
+            // 
+            this.textBoxCalcResult.Location = new System.Drawing.Point(516, 10);
+            this.textBoxCalcResult.Name = "textBoxCalcResult";
+            this.textBoxCalcResult.Size = new System.Drawing.Size(184, 20);
+            this.textBoxCalcResult.TabIndex = 20;
+            // 
+            // textBoxCalc
+            // 
+            this.textBoxCalc.Location = new System.Drawing.Point(245, 10);
+            this.textBoxCalc.Name = "textBoxCalc";
+            this.textBoxCalc.Size = new System.Drawing.Size(184, 20);
+            this.textBoxCalc.TabIndex = 19;
+            // 
+            // buttonCalc
+            // 
+            this.buttonCalc.Location = new System.Drawing.Point(435, 4);
+            this.buttonCalc.Name = "buttonCalc";
+            this.buttonCalc.Size = new System.Drawing.Size(75, 30);
+            this.buttonCalc.TabIndex = 18;
+            this.buttonCalc.Text = "计算";
+            this.buttonCalc.UseVisualStyleBackColor = true;
+            this.buttonCalc.Click += new System.EventHandler(this.buttonCalc_Click);
+            // 
+            // btnJsonToClass
+            // 
+            this.btnJsonToClass.Location = new System.Drawing.Point(597, 75);
+            this.btnJsonToClass.Name = "btnJsonToClass";
+            this.btnJsonToClass.Size = new System.Drawing.Size(75, 30);
+            this.btnJsonToClass.TabIndex = 17;
+            this.btnJsonToClass.Text = "JsonToClass";
+            this.btnJsonToClass.UseVisualStyleBackColor = true;
+            this.btnJsonToClass.Click += new System.EventHandler(this.btnJsonToClass_Click);
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(435, 73);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 30);
+            this.btnTest.TabIndex = 16;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnLogin
             // 
@@ -129,7 +181,7 @@
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(647, 3);
+            this.btnExit.Location = new System.Drawing.Point(729, 3);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(25, 25);
             this.btnExit.TabIndex = 13;
@@ -266,7 +318,7 @@
             this.tabInformation.Location = new System.Drawing.Point(0, 0);
             this.tabInformation.Name = "tabInformation";
             this.tabInformation.SelectedIndex = 0;
-            this.tabInformation.Size = new System.Drawing.Size(684, 333);
+            this.tabInformation.Size = new System.Drawing.Size(766, 333);
             this.tabInformation.TabIndex = 0;
             // 
             // tabPageResult
@@ -275,7 +327,7 @@
             this.tabPageResult.Location = new System.Drawing.Point(4, 22);
             this.tabPageResult.Name = "tabPageResult";
             this.tabPageResult.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageResult.Size = new System.Drawing.Size(676, 307);
+            this.tabPageResult.Size = new System.Drawing.Size(758, 307);
             this.tabPageResult.TabIndex = 0;
             this.tabPageResult.Text = "结果";
             this.tabPageResult.UseVisualStyleBackColor = true;
@@ -286,7 +338,7 @@
             this.dataGridViewResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewResult.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewResult.Name = "dataGridViewResult";
-            this.dataGridViewResult.Size = new System.Drawing.Size(670, 301);
+            this.dataGridViewResult.Size = new System.Drawing.Size(752, 301);
             this.dataGridViewResult.TabIndex = 0;
             // 
             // tabPageLog
@@ -295,7 +347,7 @@
             this.tabPageLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageLog.Name = "tabPageLog";
             this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLog.Size = new System.Drawing.Size(676, 307);
+            this.tabPageLog.Size = new System.Drawing.Size(758, 307);
             this.tabPageLog.TabIndex = 1;
             this.tabPageLog.Text = "日志";
             this.tabPageLog.UseVisualStyleBackColor = true;
@@ -309,7 +361,7 @@
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLog.Size = new System.Drawing.Size(670, 301);
+            this.textBoxLog.Size = new System.Drawing.Size(752, 301);
             this.textBoxLog.TabIndex = 0;
             // 
             // tabPageSummary
@@ -317,7 +369,7 @@
             this.tabPageSummary.Controls.Add(this.textBoxSummary);
             this.tabPageSummary.Location = new System.Drawing.Point(4, 22);
             this.tabPageSummary.Name = "tabPageSummary";
-            this.tabPageSummary.Size = new System.Drawing.Size(676, 307);
+            this.tabPageSummary.Size = new System.Drawing.Size(758, 307);
             this.tabPageSummary.TabIndex = 2;
             this.tabPageSummary.Text = "统计";
             this.tabPageSummary.UseVisualStyleBackColor = true;
@@ -330,33 +382,23 @@
             this.textBoxSummary.Multiline = true;
             this.textBoxSummary.Name = "textBoxSummary";
             this.textBoxSummary.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSummary.Size = new System.Drawing.Size(676, 307);
+            this.textBoxSummary.Size = new System.Drawing.Size(758, 307);
             this.textBoxSummary.TabIndex = 0;
             // 
             // tabPageBrowser
             // 
             this.tabPageBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabPageBrowser.Name = "tabPageBrowser";
-            this.tabPageBrowser.Size = new System.Drawing.Size(676, 307);
+            this.tabPageBrowser.Size = new System.Drawing.Size(758, 307);
             this.tabPageBrowser.TabIndex = 3;
             this.tabPageBrowser.Text = "登录";
             this.tabPageBrowser.UseVisualStyleBackColor = true;
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(435, 73);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 30);
-            this.btnTest.TabIndex = 16;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // FormCapture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 462);
+            this.ClientSize = new System.Drawing.Size(766, 462);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainerMain);
             this.Name = "FormCapture";
@@ -409,5 +451,9 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TabPage tabPageBrowser;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnJsonToClass;
+        private System.Windows.Forms.Button buttonCalc;
+        private System.Windows.Forms.TextBox textBoxCalc;
+        private System.Windows.Forms.TextBox textBoxCalcResult;
     }
 }

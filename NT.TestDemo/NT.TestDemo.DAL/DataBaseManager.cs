@@ -713,9 +713,16 @@ namespace NT.TestDemo.DAL
             {
                 if (string.IsNullOrEmpty(_connStr))
                 {
-                    string connstr = ConfigurationManager.AppSettings.Get(KEYNAME_CONNECTION);
-                    var helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
-                    _connStr = helper.Decrypto(connstr);
+                    if (String.IsNullOrEmpty(ConfigInformation.Connectiong))
+                    {
+                        string connstr = ConfigurationManager.AppSettings.Get(KEYNAME_CONNECTION);
+                        var helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+                        _connStr = helper.Decrypto(connstr);
+                    }
+                    else
+                    {
+                        _connStr = ConfigInformation.Connectiong;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(_connStr))

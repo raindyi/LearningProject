@@ -321,6 +321,27 @@ namespace NT.TestDemo.UI.Forms
             }
         }
 
+        private void btnJsonToClass_Click(object sender, EventArgs e)
+        {
+            FormJsonToClass formJson=new FormJsonToClass();
+            formJson.Show();
+        }
+
+        private void buttonCalc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long l = long.Parse(textBoxCalc.Text.Trim());
+                DateTime de1970=new DateTime(1970,1,1);
+                DateTime de = new DateTime(de1970.Ticks + l * 10000 + TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours * 3600 * (long)10000000);
+                textBoxCalcResult.Text = de.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            catch (Exception)
+            {
+                textBoxCalcResult.Text = DateTime.Now.Ticks.ToString();
+            }
+        }
+
        
 
         

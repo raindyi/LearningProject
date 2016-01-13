@@ -43,6 +43,7 @@ namespace NT.TestDemo.Core.Lib
         private const Int32 DefSleepInterval = 2000;
         private Dictionary<Int32, ThreadInformation> _threadPools = new Dictionary<Int32, ThreadInformation>();
         //private ThreadStart _threadStart = null;
+
         private Boolean _serviceFlag = true;
         #endregion
 

@@ -22,5 +22,16 @@ namespace NT.TestDemo.UI.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=NT-IT-LYNN\\sqlexpress;Initial Catalog=BusinessReport;User ID=sa;Passw" +
+            "ord=sa")]
+        public string BusinessReportConnectionString {
+            get {
+                return ((string)(this["BusinessReportConnectionString"]));
+            }
+        }
     }
 }

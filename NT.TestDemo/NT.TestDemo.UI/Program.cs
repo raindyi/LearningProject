@@ -38,7 +38,7 @@ namespace NT.TestDemo.UI
                 OperResult = "Ready",
                 User = "Tester"
             });
-            Application.Run(new FormCapture());
+            Application.Run(new FormChart());
         }
 
         static void Application_ThreadExit(object sender, EventArgs e)
