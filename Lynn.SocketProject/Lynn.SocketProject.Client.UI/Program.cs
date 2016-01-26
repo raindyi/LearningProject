@@ -18,6 +18,7 @@ namespace Lynn.SocketProject.Client.UI
             Application.SetCompatibleTextRenderingDefault(false);
             BasicConfigurator.Configure();
             Application.Run(new ClientForm());
+            //Application.Run(new frmClient());
         }
     }
 }

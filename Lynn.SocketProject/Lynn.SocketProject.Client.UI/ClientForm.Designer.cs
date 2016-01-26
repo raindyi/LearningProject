@@ -43,6 +43,7 @@
             this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
             this.groupBoxClientList = new System.Windows.Forms.GroupBox();
             this.listBoxClientList = new System.Windows.Forms.ListBox();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.groupBoxConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).BeginInit();
             this.statusStripMain.SuspendLayout();
@@ -183,11 +184,22 @@
             this.listBoxClientList.Size = new System.Drawing.Size(143, 291);
             this.listBoxClientList.TabIndex = 0;
             // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(545, 388);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(60, 30);
+            this.buttonTest.TabIndex = 20;
+            this.buttonTest.Text = "测试";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 479);
+            this.Controls.Add(this.buttonTest);
             this.Controls.Add(this.groupBoxClientList);
             this.Controls.Add(this.groupBoxConfig);
             this.Controls.Add(this.statusStripMain);
@@ -226,5 +238,6 @@
         private System.Windows.Forms.RichTextBox richTextBoxMessage;
         private System.Windows.Forms.GroupBox groupBoxClientList;
         private System.Windows.Forms.ListBox listBoxClientList;
+        private System.Windows.Forms.Button buttonTest;
     }
 }

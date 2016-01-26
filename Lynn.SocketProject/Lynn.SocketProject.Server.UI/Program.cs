@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using log4net.Config;
 
 namespace Lynn.SocketProject.Server.UI
 {
@@ -15,7 +16,8 @@ namespace Lynn.SocketProject.Server.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            BasicConfigurator.Configure();
+            Application.Run(new ServerForm());
         }
     }
 }

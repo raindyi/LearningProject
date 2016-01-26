@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using HPSocketCS;
 using log4net;
@@ -23,7 +25,8 @@ namespace Lynn.SocketProject.Client.UI
         private UpdateDataSourceDelegate updateDataSource;
         //private ClearTextDelegate clearText;
         private SetTextDelegate setText;
-        private HPSocketCS.TcpClient _client = null;
+        private SetControlEnableDelegate setControlEnable;
+        HPSocketCS.TcpClient _client = new TcpClient();
         private List<String> _listClient=new List<String>();
         private static Boolean _connectState = false;
         #endregion
@@ -44,17 +47,24 @@ namespace Lynn.SocketProject.Client.UI
         {
             buttonStop.Enabled = false;
             buttonSender.Enabled = false;
+            numericUpDownPort.Maximum = 9999;
+            numericUpDownPort.Value = 2016;
+            numericUpDownPort.Minimum = 1;
         }
         private void InitData()
         {
-            _client=new TcpClient();
-            addMessage=new AddMessageDelegate(AddMessageInvoke);
+            //_client= new TcpClient();
+            addMessage =new AddMessageDelegate(AddMessageInvoke);
             updateDataSource=new UpdateDataSourceDelegate(UpdateClientListInvoke);
+            addStatusMessage=new AddMessageDelegate(AddStatusMessageInvoke);
+            setControlEnable= new SetControlEnableDelegate(SetControlEnableInvoke);
             //clearText=new ClearTextDelegate(ClearTextInvoke);
-            setText=new SetTextDelegate(SetTextInvoke);
+            setText =new SetTextDelegate(SetTextInvoke);
         }
         private void InitControlAfterData()
         {
+            Closing += ClientForm_Closing;
+            richTextBoxMessage.MouseDoubleClick += RichTextBoxMessage_MouseDoubleClick;
             _client.OnPrepareConnect += _client_OnPrepareConnect;
             _client.OnConnect += _client_OnConnect;
             _client.OnClose += _client_OnClose;
@@ -134,6 +144,18 @@ namespace Lynn.SocketProject.Client.UI
             }
         }
 
+        private void SetControlEnableInvoke(Control sender,Boolean enable)
+        {
+            if (sender.InvokeRequired)
+            {
+                sender.Invoke(setControlEnable, sender, enable);
+            }
+            else
+            {
+                sender.Enabled = enable;
+            }
+        }
+
         private void UpdateUi(Boolean connected)
         {
             buttonStop.Enabled = connected;
@@ -145,34 +167,43 @@ namespace Lynn.SocketProject.Client.UI
 
         private void Connect()
         {
-            _client=new TcpClient();
-            _connectState = _client.Connetion(textBoxServerIP.Text, (ushort) numericUpDownPort.Value, false);
-            UpdateUi(_connectState);
+            try
+            {
+                _log.Debug("Client try to start...");
+                //_client = new TcpClient();
+                _connectState = _client.Connetion(textBoxServerIP.Text, (ushort) numericUpDownPort.Value, false);
+                UpdateUi(_connectState);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Client connect exception",ex);
+            }
         }
 
         private void Stop()
         {
             if (_connectState)
             {
-                Boolean result=_client.Stop();
-                if (result)
-                {
-                    _connectState = false;
-                }
+                _client.Stop();
+                _connectState = false;
                 UpdateUi(_connectState);
             }
         }
 
-        private void Send()
+        private void Close()
         {
-            String message = textBoxSender.Text;
+            _client.Destroy();
+        }
+
+        private void Send(String message)
+        {
             if (message.Length > 0)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(message);
+                byte[] bytes = Encoding.Unicode.GetBytes(message);
                 Boolean result = _client.Send(bytes, 0, bytes.Length);
                 if (result)
                 {
-                    addMessage(String.Format("[{0}] ",DateTime.Now.ToString("HH:mm:ss"),message));
+                    AddMessageInvoke(String.Format("{0}->",message));
                     setText(textBoxSender, "", false);
                 }
             }
@@ -182,9 +213,32 @@ namespace Lynn.SocketProject.Client.UI
             }
         }
 
-        private void Receive()
+        private void Receive(TcpClient sender, IntPtr pData, int length)
         {
+            byte[] bytes = new byte[length];
+            Marshal.Copy(pData, bytes, 0, length);
+            String message = Encoding.Unicode.GetString(bytes);
+            //String message = sender.ByteToStructure<String>(bytes);
+            AddMessageInvoke(String.Format("->{0}", message));
+        }
 
+        private void Test()
+        {
+            buttonTest.Enabled = false;
+            Thread thread=new Thread(new ThreadStart(Work));
+            thread.Start();
+        }
+
+        private void Work()
+        {
+            Int32 i = 0;
+            while (i<10000)
+            {
+                Send(Guid.NewGuid().ToString());
+                Thread.Sleep(10);
+                i++;
+            }
+            setControlEnable(buttonTest, true);
         }
 
         #endregion
@@ -194,15 +248,29 @@ namespace Lynn.SocketProject.Client.UI
         {
             Init();
         }
-
+        private void ClientForm_Closing(object sender, CancelEventArgs e)
+        {
+            Close();
+        }
         private HandleResult _client_OnReceive(TcpClient sender, IntPtr pData, int length)
         {
-
+            try
+            {
+                Receive(sender, pData, length);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Client receive exception", ex);
+                return HandleResult.Ignore;
+            }
             return HandleResult.Ok;
         }
 
         private HandleResult _client_OnSend(TcpClient sender, IntPtr pData, int length)
         {
+            byte[] bytes = new byte[length];
+            Marshal.Copy(pData, bytes, 0, length);
+            String message = Encoding.Unicode.GetString(bytes);
             return HandleResult.Ok;
         }
 
@@ -213,12 +281,14 @@ namespace Lynn.SocketProject.Client.UI
 
         private HandleResult _client_OnClose(TcpClient sender)
         {
+            Stop();
             _log.Debug("Disconnecting from the server ");
             return HandleResult.Ok;
         }
 
         private HandleResult _client_OnConnect(TcpClient sender)
         {
+            //Send("Hello we connected,呵呵");
             _log.Debug("Server connected ");
             return HandleResult.Ok;
         }
@@ -232,7 +302,7 @@ namespace Lynn.SocketProject.Client.UI
 
         private void buttonSender_Click(object sender, EventArgs e)
         {
-            Send();
+            Send(textBoxSender.Text);
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -242,6 +312,15 @@ namespace Lynn.SocketProject.Client.UI
         private void buttonStop_Click(object sender, EventArgs e)
         {
             Stop();
+        }
+        private void RichTextBoxMessage_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            richTextBoxMessage.Clear();
+        }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            Test();
         }
         #endregion
     }

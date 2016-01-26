@@ -5,22 +5,22 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lynn.SocketProject.Server.UI")]
+[assembly: AssemblyTitle("Lynn.SocketProject.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lynn.SocketProject.Server.UI")]
+[assembly: AssemblyProduct("Lynn.SocketProject.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b08fc08d-875e-420c-87fd-a03e61e065fe")]
+[assembly: Guid("5d2f93d6-f4af-4444-abdc-f9bf4daa6627")]
 
 // Version information for an assembly consists of the following four values:
 //
