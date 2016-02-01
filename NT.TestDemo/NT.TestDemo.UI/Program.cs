@@ -26,19 +26,19 @@ namespace NT.TestDemo.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BasicConfigurator.Configure();
-            ConfigLogConnection();
-            ILog logdb = LogManager.GetLogger("OperInfoLogger");
-            logdb.Debug(new UserOperLogModel()
-            {
-                Flag = 1,
-                ID = Guid.NewGuid(),
-                Message = "Message:Program running",
-                OperFlag = "1",
-                OperInfo = "Program running",
-                OperResult = "Ready",
-                User = "Tester"
-            });
-            Application.Run(new FormChart());
+            //ConfigLogConnection();
+            //ILog logdb = LogManager.GetLogger("OperInfoLogger");
+            //logdb.Debug(new UserOperLogModel()
+            //{
+            //    Flag = 1,
+            //    ID = Guid.NewGuid(),
+            //    Message = "Message:Program running",
+            //    OperFlag = "1",
+            //    OperInfo = "Program running",
+            //    OperResult = "Ready",
+            //    User = "Tester"
+            //});
+            Application.Run(new HtmlAnalyFormcs());
         }
 
         static void Application_ThreadExit(object sender, EventArgs e)

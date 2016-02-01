@@ -92,6 +92,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NT.TestDemo.Core\Dll\Newtonsoft.Json.dll</HintPath>
@@ -153,6 +157,12 @@
     <Compile Include="Forms\FormThreadGroup.Designer.cs">
       <DependentUpon>FormThreadGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HtmlAnalyFormcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HtmlAnalyFormcs.Designer.cs">
+      <DependentUpon>HtmlAnalyFormcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\RandomDataHelper.cs" />
     <Compile Include="Lib\ConfigLib.cs" />
     <Compile Include="Lib\ExWebClientLib.cs">
@@ -191,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormThreadGroup.resx">
       <DependentUpon>FormThreadGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HtmlAnalyFormcs.resx">
+      <DependentUpon>HtmlAnalyFormcs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -259,7 +272,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Html\HTMLPage1.html" />
+    <Content Include="Dll\HtmlAgilityPack.dll" />
+    <Content Include="Html\TestPage.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\001alpha.ico" />
     <Content Include="Images\002-lower-beta.ico" />
     <Content Include="Images\003-lower-gamma.ico" />

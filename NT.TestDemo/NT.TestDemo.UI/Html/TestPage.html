@@ -1,0 +1,2676 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="gbk" />
+    <title> 淘宝旅行-后台</title>
+    <link rel="shortcut icon" href="//g.alicdn.com/trip/tools/img/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//g.alicdn.com//trip/flight-agent/0.1.22/??widgets/bootstrap/css/bootstrap.css,widgets/base/base-min.css,widgets/market-rule/index-min.css" rel="stylesheet">
+    <link href="//g.alicdn.com//trip/flight-agent/0.1.22/widgets/bootstrap/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script>
+        window.g_config = {
+            appId: 10,
+            toolbar: false
+        };
+        var GLOBAL_CONFIG = {
+            version: '0.1.22',
+            domain: '//g.alicdn.com//'
+        }
+    </script>
+    <!-- start vmc js 3.1 -->
+    <script src="//g.alicdn.com/kissy/k/1.3.0/seed-min.js"></script>
+    <script src="//g.alicdn.com/tb/global//global-min.js?t="></script>
+    <!-- end vmc js 3.1 -->
+
+
+    <script type="text/javascript" src="//g.alicdn.com//trip/flight-agent/0.1.22/config.js"></script>
+    <script src="//g.alicdn.com//trip/flight-agent/0.1.22/widgets/bootstrap/js/jquery.js" moveto="none"></script>
+
+    <link rel="stylesheet" href="//g.alicdn.com//tpi/pi/1.1.2/??loading/index-min.css,price/index-min.css" />
+    <!--[if lt IE 9]>
+    <script src="//assets.alicdn.com/app/dp/s/html5/js/??html5shiv-min.js"></script>
+    <script src="//g.alicdn.com//trip/flight-agent/0.1.22/widgets/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+</head>
+<body>
+    <script type="text/javascript">
+        (function (d) {
+            var t = d.createElement("script"); t.type = "text/javascript"; t.async = true; t.id = "tb-beacon-aplus";
+            t.setAttribute("exparams", "category=&userid=52748425&aplus");
+            t.src = ("https:" == d.location.protocol ? "https://s" : "http://a") + ".tbcdn.cn/s/aplus_v2.js";
+            d.getElementsByTagName("head")[0].appendChild(t);
+        })(document);
+    </script>
+
+    <!--[if lt IE 8]>
+    <div class="broswer-tip alert alert-danger">
+        <div class="browser-tip-in"><strong>Sorry,您的浏览器不能正常访问代理商后台，请升级浏览器，同时也能提高您的访问速度 | <a class="anti-ie6-top-ie8" href="http://windows.microsoft.com/zh-CN/internet-explorer/downloads/ie" target="_blank">ie8浏览器</a>
+        <a href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">谷歌浏览器</a></strong></div>
+    </div>
+    <![endif]-->
+
+
+    <header class="navbar agent-top" role="banner">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">淘宝旅行-代理商后台</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a id="J_TopIndex" href=""><span class="glyphicon glyphicon-home"></span>首页</a>
+                </li>
+                <li>
+                    <a id="J_TopProduct" href=""><span class="glyphicon glyphicon-plane"></span> 产品管理</a>
+                </li>
+                <li>
+                    <a id="J_TopOrder" href=""><span class="glyphicon glyphicon-list"></span> 订单管理</a>
+                </li>
+                <li>
+                    <a id="J_TopPublic" href=""><span class="glyphicon glyphicon-briefcase"></span> 公共管理</a>
+                </li>
+                <li class="disabled">
+                    <a href="#"><span class="glyphicon glyphicon-cog"></span> 其他设置</a>
+                </li>
+            </ul>
+
+            <script>
+                (function () {
+                    var isDaily = location.host.indexOf('.daily.') > -1;
+                    var domain = location.host.indexOf('.alitrip.') > -1 ? 'alitrip' : 'taobao';
+                    var host;
+
+                    if (isDaily) {
+                        host = 'dai' + 'ly.alitrip.net';
+                    }
+                    else {
+                        host = 'alitrip.com';
+                    }
+
+                    document.getElementById('J_TopIndex').href = '//jipiao.' + host + '/agent/index.htm';
+                    document.getElementById('J_TopProduct').href = '//jipiao.' + host + '/atpolicy/publicfare/public_fare_policy_list.htm';
+                    document.getElementById('J_TopOrder').href = '//jipiao.' + host + '/agent/trip_seller_order_list.htm';
+                    document.getElementById('J_TopPublic').href = '//agent.' + host + '/manage/modifyBasicInfo.htm';
+                })();
+            </script>
+            <div class="pull-right userinfo">
+                <span class="glyphicon glyphicon-user">
+                    您好，
+                    <strong>联丰航空！</strong>
+                    <a href="//agent.alitrip.com/agent_logout.htm" title="退出系统">[退出]</a>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <script>
+        KISSY.use('core', function (S) {
+            TB.Global.init();
+        });
+    </script>
+
+    <div class="layout clearfix">
+        <div class="sidebar" style="z-index: 10000;">
+            <h3 class="new-agent-nav-tit"><span class="glyphicon glyphicon-list"></span> 机票代理商管理系统</h3>
+            <ul>
+                <li class="J_HasSubmenu menu open
+			active			">
+                    <a href="/atpolicy/publicfare/publicFarePolicyList.htm"><strong>运价管理</strong></a>
+                    <ul class="J_Submenu sub-menu">
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/publicfare/publicFarePolicyList.htm">查询维护公布运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/publicfare/publicFareDetail.htm">申请公布运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/discountfare/discountFarePolicyList.htm">查询维护折扣运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/discountfare/discountFareDetail.htm">添加折扣运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/rounddecreasefare/roundDecreaseFareList.htm">查询往返直减运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/rounddecreasefare/roundDecreaseFareDetail.htm">添加往返直减运价</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/interpolicy/interFarePolicyList.htm">查询维护渠道政策</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/discountfare/discountFarePublishedList.htm">已发布折扣运价航线列表</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/fare/fareStopStatList.htm">运价停用统计</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/tuigaiqian/tuigaiqianList.htm">退改签规则设置</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/tuigaiqian/taobaoTuigaiqianList.htm">查询淘宝退改签</a></li>
+                    </ul>
+                </li>
+                <li class="J_HasSubmenu menu open
+			">
+                    <a href="/atpolicy/policy/defaultPolicyList.htm"><strong>销售规则管理</strong></a>
+                    <ul class="J_Submenu sub-menu">
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/defaultPolicyList.htm">查询默认销售规则</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/defaultPolicyDetail.htm">添加默认销售规则</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/dynamicpolicy/dynamicPolicyList.htm">查询动态销售规则</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/dynamicpolicy/dynamicPolicyDetail.htm">添加动态销售规则</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/templatePolicyList.htm">查询销售规则模板</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/templatePolicyDetail.htm">添加销售规则模板</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/binding/policyBindingJobList.htm">批量绑定销售规则</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/excel/excelJobList.htm">Excel上传</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/policy/downloadJobList.htm">运价数据下载</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/boutique/boutiquePolicyList.htm">精选销售规则</a></li>
+                    </ul>
+                </li>
+                <li class="J_HasSubmenu menu open
+			">
+                    <a href="/atpolicy/stock/route_query.htm"><strong>库存管理</strong></a>
+                    <ul class="J_Submenu sub-menu">
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/stock/route_query.htm">申请库存管理</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/flight_stock_view.htm">私有库存管理</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/stock/query.htm">申请/私有库存查询</a></li>
+                    </ul>
+                </li>
+                <li class="J_HasSubmenu menu open
+            ">
+                    <a href="/atpolicy/stock/route_query.htm"><strong>其他</strong></a>
+                    <ul class="J_Submenu sub-menu">
+                        <li>&nbsp;-&nbsp;<a href="/atpolicy/other/topPriceList.htm">查看前台航线价格</a></li>
+                        <li>&nbsp;-&nbsp;<a href="//sjipiao.alitrip.com/flight_search_result.htm?tripType=0&depCity=BJS&arrCity=SHA&agentCompare=true&loginAgentId=311" target="_blank">航线比价、调价</a></li>
+                    </ul>
+                </li>
+                <li class="J_HasSubmenu menu open">
+                    <a href="#"><strong>数据中心</strong></a>
+                    <ul class="J_Submenu sub-menu">
+                        <li>&nbsp;-&nbsp;<a href="/agent/hotAirLine.htm">热门航线</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/agent/hotCity.htm">热门城市</a></li>
+                        <li>&nbsp;-&nbsp;<a href="/agent/salesPerformance.htm">数据对比</a></li>
+                    </ul>
+                </li>
+
+        </div>
+
+        <div class="content">
+            <div class="mod">
+                <div class="mod-hd">
+                    <h3>
+                        折扣运价查询
+                    </h3>
+                </div>
+                <div class="mod-bd  J_Tabs">
+                    <form action="/atpolicy/discountfare/discountFarePolicyList.htm" class="form-inline" role="form" data-save="on" data-auto-save="off">
+                        <table class="table-form">
+                            <tr>
+                                <th>运价类型</th>
+                                <td>
+                                    <label onclick="location='/atpolicy/publicfare/publicFarePolicyList.htm?airline=CA&depCity=CAN&arrCity=HGH&travelStartDate=2016-02-15&travelEndDate=2016-02-15&updateStartDate=&updateEndDate=&isBinding=&fareSource=&cabin='">
+                                        <input type="radio" name="fareType" value="PUBLIC_FARE" class="J_TabsTrigger" />公布运价
+                                    </label>
+                                    <label><input type="radio" name="fareType" value="DISCOUNT_FARE" checked class="J_TabsTrigger" />折扣运价</label>
+                                </td>
+                                <th>查询类型</th>
+                                <td>
+                                    <label><input type="radio" name="queryType" value="ID" class="J_TabsTrigger" data-tab-hide=".J_TabsHiddenCondition" data-tab-show=".J_TabsHiddenId" />按Id查询</label>
+                                    <label><input type="radio" name="queryType" value="CONDITION" class="J_TabsTrigger" data-tab-hide=".J_TabsHiddenId,.J_TabsHidden_CONDITION" data-tab-show=".J_TabsHiddenCondition,.J_TabsShow_CONDITION" />按条件查询</label>
+                                    <label><input type="radio" name="queryType" value="AGENT_ONLY" class="J_TabsTrigger" checked data-tab-hide=".J_TabsHiddenId,.J_TabsHidden_AGENT_ONLY" data-tab-show=".J_TabsHiddenCondition,.J_TabsShow_AGENT_ONLY" />按条件仅查询自己的(可以不指定出发到达)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="J_TabsHiddenCondition">航空公司</th>
+                                <td class="J_TabsHiddenCondition">
+                                    <input type="text" value="CA" name="airline" class="form-control J_Ac ks-autocomplete-input" data-type="aircompany" placeholder="航空公司二字码" />
+                                </td>
+                                <th class="J_TabsHiddenId hidden">运价Id<span class="required">*</span></th>
+                                <td class="J_TabsHiddenId hidden">
+                                    <input required type="text" value="" name="fareId" class="form-control" placeholder="运价Id" />
+                                </td>
+                                <th>航线区域 </th>
+                                <td>
+                                    <span class="inline-block">
+                                        <input type="text" value="CAN" name="depCity" class="form-control J_Ac" size="6" data-autocomplete='{}' placeholder="城市3字码" />
+                                        至
+                                        <input type="text" value="HGH" name="arrCity" class="form-control J_Ac" data-autocomplete='{}' size="6" placeholder="城市3字码" />
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="J_TabsHiddenCondition">
+                                <th>旅行有效期</th>
+                                <td>
+                                    <input type="text" value="2016-02-15" name="travelStartDate" class="form-control J_Date" size="12" placeholder="日期" />
+                                    至
+                                    <input type="text" value="2016-02-15" name="travelEndDate" class="form-control J_Date" size="12" placeholder="日期" />
+                                </td>
+                                <th>更新时间</th>
+                                <td>
+                                    <input type="text" value="" name="updateStartDate" class="form-control" size="20" placeholder="yyyy-MM-dd HH:mm:ss" />
+                                    至
+                                    <input type="text" value="" name="updateEndDate" class="form-control" size="20" placeholder="yyyy-MM-dd HH:mm:ss" />
+                                </td>
+                            </tr>
+                            <tr class="J_TabsHiddenCondition">
+                                <th>航程类型</th>
+                                <td>
+                                    <label><input type="radio" name="tripType" value="" checked />全部</label>
+                                    <label><input type="radio" name="tripType" value="0" />单程</label>
+                                    <label><input type="radio" name="tripType" value="1" />往返</label>
+                                </td>
+                                <th>运价来源</th>
+                                <td>
+                                    <label><input type="radio" name="fareSource" value="" checked />全部</label>
+                                    <label><input type="radio" name="fareSource" value="SYSTEM" />系统自动获取</label>
+                                    <label><input type="radio" name="fareSource" value="BATCH" />批量上传</label>
+                                    <label><input type="radio" name="fareSource" value="MANUAL" />手工添加</label>
+                                </td>
+                            </tr>
+                            <tr class="J_TabsHiddenCondition">
+                                <th>绑定关系分类</th>
+                                <td>
+                                    <label><input type="radio" name="isBinding" value="" checked />全部</label>
+                                    <label><input type="radio" name="isBinding" value="false" />未绑定销售规则</label>
+                                    <label><input type="radio" name="isBinding" value="true" />已绑定销售规则</label>
+                                </td>
+                                <th><span class="">状态</span></th>
+                                <td>
+                                    <label><input type="radio" name="discountFareStatus" value="" />全部</label>
+                                    <label><input type="radio" name="discountFareStatus" value="PUBLISH" checked />已启用</label>
+                                    <label><input type="radio" name="discountFareStatus" value="CLOSE" />已停用</label>
+                                </td>
+                            </tr>
+                            <tr class="J_TabsHiddenCondition">
+                                <th>舱位</th>
+                                <td>
+                                    <input type="text" value="" name="cabin" class="form-control J_Upper" placeholder="" size="3" />
+                                </td>
+                                <th class="">
+                                    <div class="J_TabsShow_AGENT_ONLY J_TabsHidden_CONDITION">
+                                        外部ID
+                                    </div>
+                                </th>
+                                <td class="">
+                                    <div class="J_TabsShow_AGENT_ONLY J_TabsHidden_CONDITION">
+                                        <input type="text" value="" name="outId" class="form-control" size="35" placeholder="外部ID,支持后缀模糊。如：MU_C_*" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="3">
+                                    <button type="submit" class="btn btn-primary" name="searchButton" value="true">查询</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="J_TabsHiddenCondition">
+                            <p>
+                                共搜索到<span class="label label-warning">37</span>条结果
+                                <label><input type="checkbox" name="selectAll" class="J_CheckAll" value="true" />选择所有结果</label>
+                                <a class="J_Confirm"
+                                   data-confirm="确定要删除选中运价吗?"
+                                   data-param="action:DiscountFareAction,event_submit_doDelete:true,depCity:CAN,arrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                   data-addparam="true"
+                                   data-before="checkSelectedItem"
+                                   data-yes="submit"
+                                   data-method="post"
+                                   href="/atpolicy/discountfare/discountFarePolicyList.htm">删除运价</a>
+                                <a class="J_Confirm"
+                                   data-confirm="确定要停用选中运价吗?"
+                                   data-param="action:DiscountFareAction,event_submit_doStop:true,depCity:CAN,arrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                   data-addparam="true"
+                                   data-before="checkSelectedItem"
+                                   data-yes="submit"
+                                   data-method="post"
+                                   href="/atpolicy/discountfare/discountFarePolicyList.htm">停用运价</a>
+                                <a href="javascript:alert('请选择航程类型')">批量修改运价</a>
+                                <select name="fareOrderBy" class="J_AutoSubmit J_TabsHidden_AGENT_ONLY J_TabsShow_CONDITION">
+                                    <option value="TRAVEL_START_DATE" selected>按照旅行有效期开始日期排序</option>
+                                    <option value="TRAVEL_END_DATE">按照旅行有效期结束日期排序</option>
+                                    <option value="UPDATE_TIME">按照更新时间排序</option>
+                                    <option value="PRICE">按照票面价排序</option>
+                                    <option value="PUBLISH_TIME">按照发布时间排序</option>
+                                    <option value="ORDER_NUM">按照销售订单数排序</option>
+                                </select>
+                            </p>
+                            <table border="2" class="table table-striped table-bordered table-result table-minor-hide" style="width:3000px;background:#fff;max-width:none;">
+                                <thead>
+                                    <tr>
+                                        <th width="15">
+                                            <input type="checkbox" class="J_CheckAll J_CheckboxItem" data-selector=".J_SelectedFareId" />
+                                        </th>
+                                        <th width="105">操作</th>
+                                        <th width="55">运价编号</th>
+                                        <th width="55">外部ID</th>
+                                        <th width="30">航空<br />公司</th>
+                                        <th width="30">出发<br />机场</th>
+                                        <th width="30">到达<br />机场</th>
+                                        <th width="30">航程<br />类型</th>
+                                        <th width="40">可预订<br />舱位</th>
+                                        <th width="160">销售日期</th>
+                                        <th width="160">旅行日期</th>
+                                        <th width="160">旅行排除日期</th>
+                                        <th width="40">最早提前出票天数</th>
+                                        <th width="40">最晚提前出票天数</th>
+                                        <th width="40">最长停留时间</th>
+                                        <th width="40">最短停留时间</th>
+                                        <th width="60">班期(去程/回程)</th>
+                                        <th width="120">航班号</th>
+                                        <th width="100">排除航班号</th>
+                                        <th width="80">适用乘客类型</th>
+                                        <th width="45">最少成行人数</th>
+                                        <th width="70">票面价(元)</th>
+                                        <th width="55">EI项</th>
+                                        <th width="60">TourCode</th>
+                                        <th width="60">FareBasis</th>
+                                        <th width="40">已售订<br />单总数</th>
+                                        <th width="55">价格来源</th>
+                                        <th width="140">发布时间</th>
+                                        <th width="140">更新时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497510" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497510&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497510&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497510&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497510吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497510,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497510吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497510,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497510&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497510&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497510&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=H1&inboundCabin=H1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497510</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            H1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>900</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497508" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497508&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497508&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497508&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497508吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497508,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497508吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497508,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497508&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497508&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497508&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=H&inboundCabin=H" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497508</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            H
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>920</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497509" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497509&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497509&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497509&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497509吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497509,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497509吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497509,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497509&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497509&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497509&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=M1&inboundCabin=M1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497509</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            M1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>980</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497513" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497513&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497513&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497513&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497513吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497513,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497513吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497513,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497513&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497513&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497513&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=M&inboundCabin=M" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497513</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            M
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1010</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497512" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497512&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497512&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497512&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497512吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497512,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497512吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497512,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497512&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497512&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497512&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=B&inboundCabin=B" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497512</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            B
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1040</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="6119497511" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=6119497511&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497511&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=6119497511&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价6119497511吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:6119497511,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价6119497511吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:6119497511,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=6119497511&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=6119497511&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=6119497511&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Y&inboundCabin=Y" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">6119497511</span></td>
+                                        <td>金牌白班CA高舱</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Y
+                                        </td>
+                                        <td>
+                                            <p>2015-11-11至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-10至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1150</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-17 00:30:41</td>
+                                        <td>2016-01-26 04:23:12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713858" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713858&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713858&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713858&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713858吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713858,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713858吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713858,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713858&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713858&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713858&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=V1&inboundCabin=V1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713858</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            V1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>460</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713856" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713856&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713856&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713856&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713856吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713856,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713856吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713856,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713856&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713856&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713856&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=V&inboundCabin=V" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713856</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            V
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>520</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713865" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713865&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713865&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713865&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713865吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713865,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713865吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713865,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713865&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713865&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713865&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=G&inboundCabin=G" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713865</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            G
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>580</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713863" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713863&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713863&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713863&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713863吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713863,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713863吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713863,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713863&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713863&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713863&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Q1&inboundCabin=Q1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713863</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Q1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>630</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713861" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713861&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713861&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713861&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713861吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713861,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713861吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713861,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713861&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713861&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713861&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Q&inboundCabin=Q" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713861</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Q
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>690</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713860" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713860&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713860&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713860&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713860吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713860,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713860吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713860,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713860&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713860&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713860&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=L1&inboundCabin=L1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713860</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            L1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>750</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5997713867" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5997713867&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713867&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5997713867&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5997713867吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5997713867,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5997713867吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5997713867,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5997713867&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5997713867&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5997713867&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=L&inboundCabin=L" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5997713867</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            L
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>810</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382457" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382457&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382457&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382457&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382457吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382457,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382457吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382457,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382457&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382457&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382457&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=K1&inboundCabin=K1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382457</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            K1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>840</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382455" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382455&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382455&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382455&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382455吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382455,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382455吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382455,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382455&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382455&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382455&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=K&inboundCabin=K" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382455</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            K
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>860</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382453" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382453&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382453&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382453&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382453吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382453,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382453吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382453,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382453&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382453&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382453&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=H1&inboundCabin=H1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382453</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            H1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>900</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382446" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382446&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382446&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382446&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382446吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382446,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382446吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382446,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382446&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382446&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382446&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=H&inboundCabin=H" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382446</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            H
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>920</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382448" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382448&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382448&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382448&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382448吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382448,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382448吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382448,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382448&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382448&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382448&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=M1&inboundCabin=M1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382448</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            M1
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>980</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382441" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382441&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382441&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382441&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382441吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382441,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382441吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382441,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382441&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382441&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382441&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=M&inboundCabin=M" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382441</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            M
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1010</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382443" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382443&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382443&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382443&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382443吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382443,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382443吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382443,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382443&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382443&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382443&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=B&inboundCabin=B" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382443</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            B
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1040</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382450" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382450&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382450&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382450&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382450吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382450,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382450吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382450,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382450&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382450&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382450&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Y&inboundCabin=Y" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382450</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Y
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1150</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5970382451" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5970382451&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382451&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5970382451&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5970382451吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5970382451,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5970382451吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5970382451,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5970382451&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5970382451&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5970382451&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=W&inboundCabin=W" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5970382451</span></td>
+                                        <td>金牌白班CA全国</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            W
+                                        </td>
+                                        <td>
+                                            <p>2015-11-06至2016-03-26</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>1150</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2016-01-07 10:06:27</td>
+                                        <td>2016-01-26 04:23:19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441054" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441054&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441054&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441054&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441054吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441054,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441054吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441054,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441054&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441054&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441054&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=V1&inboundCabin=V1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441054</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            V1
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>460</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441057" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441057&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441057&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441057&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441057吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441057,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441057吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441057,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441057&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441057&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441057&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=V&inboundCabin=V" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441057</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            V
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>520</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441058" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441058&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441058&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441058&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441058吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441058,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441058吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441058,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441058&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441058&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441058&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=G&inboundCabin=G" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441058</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            G
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>580</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441055" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441055&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441055&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441055&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441055吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441055,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441055吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441055,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441055&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441055&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441055&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Q1&inboundCabin=Q1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441055</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Q1
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>630</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441056" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441056&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441056&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441056&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441056吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441056,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441056吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441056,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441056&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441056&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441056&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=Q&inboundCabin=Q" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441056</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            Q
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>690</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441061" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441061&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441061&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441061&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441061吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441061,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441061吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441061,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441061&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441061&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441061&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=L1&inboundCabin=L1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441061</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            L1
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>750</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441062" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441062&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441062&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441062&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441062吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441062,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441062吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441062,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441062&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441062&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441062&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=L&inboundCabin=L" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441062</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            L
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>810</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="hidden">agentId:311</span>
+                                            <input type="checkbox" name="sFId" value="5596441059" class="J_SelectedFareId J_CheckboxItem" />
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetailView.htm?id=5596441059&depCity=CAN&arrCity=HGH">查看运价</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441059&depCity=CAN&arrCity=HGH&isCopy=true">复制</a>
+                                                |&nbsp;<a target="_blank" href="/atpolicy/discountfare/discountFareDetail.htm?id=5596441059&depCity=CAN&arrCity=HGH">编辑</a>
+                                            </p>
+                                            <p>
+                                                <a class="J_Confirm" data-confirm="确定要停用运价5596441059吗？"
+                                                   data-param="action:DiscountFareAction,event_submit_doStop:true,id:5596441059,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                   data-yes="submit" href="">停用</a>
+                                                |&nbsp;<a class="J_Confirm" data-confirm="确定要删除运价5596441059吗？"
+                                                          data-param="action:DiscountFareAction,event_submit_doDelete:true,id:5596441059,fareDepCity:CAN,fareArrCity:HGH,_tb_token_:m0T8Wl4Y7U8bS96"
+                                                          data-yes="submit" href="">删除</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/discountfare/discountFarePolicyBindingList.htm?id=5596441059&depCity=CAN&arrCity=HGH">维护销售规则</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/stock/privateStockView.htm?fareId=5596441059&depC=CAN&arrC=HGH&depA=CAN&arrA=HGH&option=query">查看私有库存</a>
+                                            </p>
+                                            <p>
+                                                <a target="_blank" href="/atpolicy/tuigaiqianView.htm?type=discount&id=5596441059&depCity=CAN&arrCity=HGH">查看退改签</a>
+                                            </p>
+                                            <p>
+                                                <a data-iframe="//sjipiao.alitrip.com/atp_top_n_view.htm?type=query&agentId=311&depCity=CAN&arrCity=HGH&tripType=0&airline=CA&outboundDate=2016-02-01&inboundDate=2016-02-01&outboundCabin=K1&inboundCabin=K1" class="J_Confirm J_OpenWindow" data-width="800" data-height="550" href="#">查看前台价格</a>
+                                            </p>
+                                        </td>
+                                        <td><span style="font-weight:bold">5596441059</span></td>
+                                        <td>金牌白班CA全国1月</td>
+                                        <td>CA</td>
+                                        <td>CAN</td>
+                                        <td>HGH</td>
+                                        <td>
+                                            单程
+                                        </td>
+                                        <td>
+                                            K1
+                                        </td>
+                                        <td>
+                                            <p>2015-12-01至2016-01-31</p>
+                                        </td>
+                                        <td>
+                                            <p>2016-01-01至2016-03-26</p>
+                                        </td>
+                                        <td></td>
+                                        <td>365</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1234567</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            普通成人
+                                        </td>
+                                        <td>1</td>
+                                        <td>840</td>
+                                        <td>不得签转</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            0
+                                        </td>
+                                        <td>
+                                            批量添加
+                                        </td>
+                                        <td>2015-12-08 21:18:27</td>
+                                        <td>2016-01-26 04:23:32</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div id="J_Pagination"></div>
+                            <script type="text/javascript">
+                                KISSY.use('flight-agent/widgets/base/pagination', function (S, Page) {
+                                    Page({
+                                        node: '#J_Pagination',
+                                        name: 'currentPage',
+                                        currentPage: 1,
+                                        totalPage: 2
+                                    })
+                                });
+                            </script>
+                            每页展示
+                            <select class="form-control J_AutoSubmit" name="pageSize" data-page-selector="input[name='currentPage']">
+                                <option value="30" selected>30</option>
+                                <option value="60">60</option>
+                                <option value="90">90</option>
+                            </select>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer ">
+        <div id="J_Ana" style="display:none;"></div>
+        <div class="server_info">atpx010179212163.s.et2 耗时: 11毫秒</div>
+    </div>
+    <script src="//g.alicdn.com//trip/flight-agent/0.1.22/??widgets/bootstrap/js/bootstrap.min.js,widgets/base/base.js"></script>
+</body>
+</html>
