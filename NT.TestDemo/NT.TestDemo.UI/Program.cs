@@ -39,6 +39,7 @@ namespace NT.TestDemo.UI
             //    User = "Tester"
             //});
             Application.Run(new HtmlAnalyFormcs());
+            //Application.Run(new FormCapture());
         }
 
         static void Application_ThreadExit(object sender, EventArgs e)
